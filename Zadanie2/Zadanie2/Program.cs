@@ -17,12 +17,23 @@ namespace Zadanie2
 
             MyMatrix<double> doubleMatrix = new MyMatrix<double>(3,4);
             MyMatrix<float> floatMatrix;
-            MyMatrix<MyFraction> fractionMatrix;
+            MyMatrix<MyFraction> fractionMatrix = new MyMatrix<MyFraction>(3, 4);
 
-            double[,] tableSample = { { 1, 2, 3, 0 }, { 4, 5, 6, 0 }, { 7, 8, 9, 0 } };
+            MyFraction[,] tableSample = new MyFraction[3,4];
+            int count = 1;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    tableSample[i,j] = new MyFraction(count);
+                    count++;
 
-            doubleMatrix.complementMatrix(tableSample);
-            doubleMatrix.printMatrix();
+                }
+            }
+
+            tableSample[2, 3] = new MyFraction(2,4);
+            fractionMatrix.complementMatrix(tableSample);
+            fractionMatrix.printMatrix();
 
 
         }

@@ -34,8 +34,9 @@ namespace Zadanie2
                 {
                     if (j != 0)
                     {
-                        Console.Write(", ");
-                    }                    
+                        Console.Write("| ");
+                    }                 
+
                     Console.Write(matrix[i,j]);
 
                 }

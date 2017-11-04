@@ -14,6 +14,9 @@ namespace Zadanie2
             this.denominator = denominator;
         }
 
+        public MyFraction(BigInteger numerator)
+            : this(numerator, 1) { }
+        
         public static MyFraction operator *(MyFraction firstFraction, MyFraction secondFraction)
         {
             return new MyFraction(firstFraction.numerator * secondFraction.numerator, firstFraction.denominator * secondFraction.denominator);
@@ -24,6 +27,11 @@ namespace Zadanie2
             BigInteger numerator = (firstFraction.numerator * secondFraction.denominator) + (secondFraction.numerator * firstFraction.denominator);
             BigInteger denominator = firstFraction.denominator * secondFraction.denominator;
             return new MyFraction(numerator, denominator);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", (double)numerator/(double)denominator);
         }
     }
 }
