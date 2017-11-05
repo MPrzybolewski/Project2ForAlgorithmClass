@@ -79,15 +79,15 @@ namespace Zadanie2
         {
             for (int i = 0; i < rows; i++)
             {
-                Console.Write("|");
+                Console.Write("| ");
                 for (int j = 0; j < columns; j++)
                 {
                     if (j != 0)
                     {
                         Console.Write("| ");
-                    }                 
-
-                    Console.Write(matrix[i,j]);
+                    }
+                    String s = String.Format("{0,-20:C5}", matrix[i,j]);
+                    Console.Write(s);
 
                 }
                 Console.WriteLine("|");
