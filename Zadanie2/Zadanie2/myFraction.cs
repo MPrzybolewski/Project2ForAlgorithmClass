@@ -31,7 +31,7 @@ namespace Zadanie2
 
         public override string ToString()
         {
-            return string.Format("{0}", (double)numerator/(double)denominator);
+            return string.Format("{0,-20:C5}", (double)numerator/(double)denominator);
         }
     }
 }
