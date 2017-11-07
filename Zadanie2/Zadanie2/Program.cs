@@ -6,34 +6,20 @@ namespace Zadanie2
     {
         public static void Main(string[] args)
         {
+            
+            MyMatrix<double> doubleMatrix = new MyMatrix<double>(4,4);
 
-            //Test fraction operations
-            MyFraction firstFraction = new MyFraction(2, 5);
-            MyFraction secondFraction = new MyFraction(3, 4);
-            MyFraction resultMultiply = firstFraction * secondFraction;
-            MyFraction resutlAdd = firstFraction + secondFraction;
-            Console.WriteLine("Multiply result: Nominator: {0}, Denominator: {1}", resultMultiply.numerator, resultMultiply.denominator);
-            Console.WriteLine("Add result: Nominator: {0}, Denominator {1}", resutlAdd.numerator, resutlAdd.denominator);
+            double[,] matrixSample = { { 4, -2, 4, -2 }, { 3, 1, 4, 2 }, { 2, 4, 2, 1 }, { 2, -2, 4, 2 } };
 
-            MyMatrix<double> doubleMatrix = new MyMatrix<double>(3,4);
-            MyMatrix<float> floatMatrix;
-            MyMatrix<MyFraction> fractionMatrix = new MyMatrix<MyFraction>(3, 4);
+            doubleMatrix.complementMatrix(matrixSample);
+            double[] bVector =  { 8, 7, 10, 2 };
+            bVector = doubleMatrix.gaussWithoutChoice(bVector);
 
-            MyFraction[,] tableSample = new MyFraction[3,4];
-            int count = 1;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < bVector.Length; i++)
             {
-                for (int j = 0; j < 4; j++)
-                {
-                    tableSample[i,j] = new MyFraction(count);
-                    count++;
-
-                }
+                Console.WriteLine(bVector[i] + " ");
             }
 
-            tableSample[2, 3] = new MyFraction(2,4);
-            fractionMatrix.complementMatrix(tableSample);
-            fractionMatrix.printMatrix();
 
 
         }

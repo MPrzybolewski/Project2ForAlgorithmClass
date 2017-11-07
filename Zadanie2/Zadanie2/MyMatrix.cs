@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace Zadanie2
 {
-    public class MyMatrix<T>
+    public class MyMatrix<T> where T : struct
     {
         private int rows;
         private int columns;
@@ -43,5 +44,50 @@ namespace Zadanie2
                 Console.WriteLine("|");
             }
         }
+
+        public T[] gaussWithoutChoice(T[] bVector)
+        {
+            makeRowEchelonMatrix(bVector);
+            return countXVector(bVector);
+        }
+
+        private void makeRowEchelonMatrix(T[] bVector)
+        {
+            for (int k = 0; k < columns; k++)
+            {
+                for (int i = k; i < rows - 1; i++)
+                {
+                    T numberForMultiply = (dynamic)matrix[i + 1, k] / matrix[k, k];
+
+                    for (int j = k; j < columns; j++)
+                    {
+                        matrix[i + 1, j] -= ((dynamic)matrix[k, j] * numberForMultiply);
+                    }
+
+                    bVector[i + 1] -= ((dynamic)bVector[k] * numberForMultiply);
+                }
+            }
+            
+        }
+
+        private T[] countXVector(T[] bVector)
+        {
+            T[] xVector = new T[bVector.Length];
+            for (int i = bVector.Length - 1; i >= 0; i--)
+            {
+                int j = i;
+                T numerator = bVector[i];
+                while (j < (columns - 1))
+                {
+                    numerator -= ((dynamic)matrix[i, j + 1] * xVector[j + 1]);
+                    j++;
+                }
+                xVector[i] = (dynamic)numerator / matrix[i, i];
+
+            }
+
+            return xVector;
+        }
+
     }
 }
