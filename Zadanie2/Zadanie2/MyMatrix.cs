@@ -16,52 +16,48 @@ namespace Zadanie2
 
         public static MyMatrix<T> operator +(MyMatrix <T> firstMatrix, MyMatrix <T> secondMatrix)
         {
-            Type t = firstMatrix.matrix[0, 0].GetType();
-            object result = 0, x  = 0, y = 0;
             if ((firstMatrix.rows==secondMatrix.rows) && (firstMatrix.columns==secondMatrix.columns))
             {
                 MyMatrix<T> temp = new MyMatrix<T>(firstMatrix.rows, firstMatrix.columns);
-                for (int i = 0; i < firstMatrix.columns; i++)
+                for (int i = 0; i < firstMatrix.rows; i++)
                 {
-                    for (int j = 0; j < firstMatrix.rows; j++)
+                    for (int j = 0; j < firstMatrix.columns; j++)
                     {
-                        if (t == typeof(double))
-                        {
-                            x = Convert.ToDouble(firstMatrix.matrix[j, i].ToString());
-                            y = Convert.ToDouble(secondMatrix.matrix[j, i].ToString());
-                            result = (double)x + (double)y;
-                            temp.matrix[j, i] = (T)result;
-                        }
-
-                        if (t == typeof(float))
-                        {
-                            x = float.Parse(firstMatrix.matrix[j, i].ToString());
-                            y = float.Parse(secondMatrix.matrix[j, i].ToString());
-                            result = (float)x + (float)y;
-                            temp.matrix[j, i] = (T)result;
-                        }
-
-                        if (t == typeof(Int64))
-                        {
-                            x = Convert.ToInt64(firstMatrix.matrix[j, i].ToString());
-                            y = Convert.ToDouble(secondMatrix.matrix[j, i].ToString());
-                            result = (int)x + (int)y;
-                            temp.matrix[j, i] = (T)result;
-                        }
-
-                        if (t == typeof(MyFraction))
-                        {
-                            x = firstMatrix.matrix[j, i];
-                            y = secondMatrix.matrix[j, i];
-                            result = (MyFraction)x + (MyFraction)y;
-                            temp.matrix[j, i] = (T)result;
-                        }
-
+                        temp.matrix[i, j] = (dynamic)firstMatrix.matrix[i, j] + (dynamic)secondMatrix.matrix[i, j];                    
                     }
                 }
                 return temp;
             }
             return new MyMatrix<T>(1,1);
+        }
+
+        public static MyMatrix<T> operator *(MyMatrix<T> firstMatrix, MyMatrix<T> secondMatrix)
+        {
+            //Console.WriteLine("A[rows]={0}, A[columns]={1},B[rows]={2},B[columns]={3}", firstMatrix.rows, firstMatrix.columns, secondMatrix.rows, secondMatrix.columns);
+            if (firstMatrix.rows == secondMatrix.columns)
+            {
+                MyMatrix<T> temp = new MyMatrix<T>(firstMatrix.rows, secondMatrix.columns);
+                for (int i = 0; i < firstMatrix.rows; i++)
+                {
+                    for (int j = 0; j < secondMatrix.columns; j++)
+                    {
+                        MyMatrix<T> sum = new MyMatrix<T>(1, 1);
+                        //Tu nie działa!
+                        sum.matrix[0, 0] = 0;
+                        for (int k = 0; k < firstMatrix.columns; k++)
+                        {
+                            Console.WriteLine("Wynik przed = {0}", sum.matrix[0, 0]);
+                            sum.matrix[0,0] = (dynamic)firstMatrix.matrix[i, k] * (dynamic)secondMatrix.matrix[k, j];
+                            Console.WriteLine("A[row,column]={0},{1} * B[row,column]={2},{3} = {4}", i, k, k, j, sum.matrix[0, 0]);
+                            sum.matrix[0, 0] = (dynamic)sum.matrix[0, 0] + (dynamic)sum.matrix[0, 0];
+                            Console.WriteLine("Wynik po = {0}",sum.matrix[0, 0]);
+                        }
+                        temp.matrix[i, j] = sum.matrix[0,0];
+                    }
+                }
+                return temp;
+            }
+            return new MyMatrix<T>(1, 1);
         }
 
         public void complementMatrix(T[,] table)
