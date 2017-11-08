@@ -47,11 +47,11 @@ namespace Zadanie2
 
         public T[] gaussWithoutChoice(T[] bVector)
         {
-            makeRowEchelonMatrix(bVector);
+            bVector = makeRowEchelonMatrix(bVector);
             return countXVector(bVector);
         }
 
-        private void makeRowEchelonMatrix(T[] bVector)
+        private T[] makeRowEchelonMatrix(T[] bVector)
         {
             for (int k = 0; k < columns; k++)
             {
@@ -67,7 +67,8 @@ namespace Zadanie2
                     bVector[i + 1] -= ((dynamic)bVector[k] * numberForMultiply);
                 }
             }
-            
+
+            return bVector;
         }
 
         private T[] countXVector(T[] bVector)
