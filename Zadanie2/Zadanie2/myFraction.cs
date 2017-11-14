@@ -46,5 +46,32 @@ namespace Zadanie2
         {
             return string.Format("{0}", (double)numerator/(double)denominator);
         }
+
+        public static bool operator <(MyFraction firstFraction, MyFraction secondFraction)
+        {
+            double firstFractionValue = (double)firstFraction.numerator / (double)firstFraction.denominator;
+            double secondFractionValue = (double)secondFraction.numerator / (double)secondFraction.denominator;
+            if (firstFractionValue < secondFractionValue)
+            {
+                return true;
+            } else 
+            {
+                return false;
+            }
+        }
+
+        public static bool operator >(MyFraction firstFraction, MyFraction secondFratcion)
+        {
+            double firstFractionValue = (double)firstFraction.numerator / (double)firstFraction.denominator;
+            double secondFractionValue = (double)secondFratcion.numerator / (double)secondFratcion.denominator;
+            if (firstFractionValue > secondFractionValue)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

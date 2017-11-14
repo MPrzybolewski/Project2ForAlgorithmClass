@@ -51,6 +51,13 @@ namespace Zadanie2
             return countXVector(bVector);
         }
 
+
+        public T[] gaussWithRowChoice(T[] bVector)
+        {
+            bVector = makeRowEchelonMatrixWithRowChoice(bVector);
+            return countXVector(bVector);
+        }
+
         private T[] makeRowEchelonMatrix(T[] bVector)
         {
             for (int k = 0; k < columns; k++)
@@ -67,6 +74,66 @@ namespace Zadanie2
                     bVector[i + 1] -= ((dynamic)bVector[k] * numberForMultiply);
                 }
             }
+
+            return bVector;
+        }
+
+        private T[] makeRowEchelonMatrixWithRowChoice(T[] bVector)
+        {
+            for (int k = 0; k < columns; k++)
+            {
+                int rowWithDiagonalNumber = k;
+                int rowNumberWithMaxNumberInColumn = findRowWithMaxNumberInColumn(k);
+
+                if(rowNumberWithMaxNumberInColumn != rowWithDiagonalNumber)
+                {
+                    bVector = swapRows(rowWithDiagonalNumber, rowNumberWithMaxNumberInColumn, bVector);
+                }
+
+                for (int i = k; i < rows - 1; i++)
+                {
+                    T numberForMultiply = (dynamic)matrix[i + 1, k] / matrix[k, k];
+
+                    for (int j = k; j < columns; j++)
+                    {
+                        matrix[i + 1, j] -= ((dynamic)matrix[k, j] * numberForMultiply);
+                    }
+
+                    bVector[i + 1] -= ((dynamic)bVector[k] * numberForMultiply);
+                }
+
+            }
+            return bVector;
+        }
+
+        private int findRowWithMaxNumberInColumn(int columnNumber)
+        {
+            int rowNumberWithMaxNumberInColumn = columnNumber;
+            int firstRowUnderDiagonal = columnNumber + 1;
+            for (int i = firstRowUnderDiagonal; i < rows; i++)
+            {
+                if((dynamic)matrix[rowNumberWithMaxNumberInColumn,columnNumber] < matrix[i,columnNumber])
+                {
+                    rowNumberWithMaxNumberInColumn = i;
+                }
+            }
+            return rowNumberWithMaxNumberInColumn;
+        }
+
+        private T[] swapRows(int rowWithDiagonalNumber, int rowNumberWithMaxNumber, T[] bVector)
+        {
+            T[] tempRow = new T[columns];
+            T tempValue;
+            for (int i = 0; i < columns; i++)
+            {
+                tempRow[i] = matrix[rowWithDiagonalNumber, i];
+                matrix[rowWithDiagonalNumber, i] = matrix[rowNumberWithMaxNumber, i];
+                matrix[rowNumberWithMaxNumber, i] = tempRow[i];
+            }
+
+            tempValue = bVector[rowWithDiagonalNumber];
+            bVector[rowWithDiagonalNumber] = bVector[rowNumberWithMaxNumber];
+            bVector[rowNumberWithMaxNumber] = tempValue;
 
             return bVector;
         }
@@ -90,5 +157,13 @@ namespace Zadanie2
             return xVector;
         }
 
+        private void printVector(T[] bVector)
+        {
+            Console.WriteLine("Wektor B");
+            for (int i = 0; i < rows; i++)
+            {
+                Console.WriteLine(bVector[i]);
+            }
+        }
     }
 }
