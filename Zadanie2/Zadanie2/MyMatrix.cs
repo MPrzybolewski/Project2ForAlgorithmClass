@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Zadanie2
 {
-    public class MyMatrix<T>
+    public class MyMatrix<T> where T : new()
     {
         private int rows;
         private int columns;
@@ -33,31 +33,21 @@ namespace Zadanie2
 
         public static MyMatrix<T> operator *(MyMatrix<T> firstMatrix, MyMatrix<T> secondMatrix)
         {
-            //Console.WriteLine("A[rows]={0}, A[columns]={1},B[rows]={2},B[columns]={3}", firstMatrix.rows, firstMatrix.columns, secondMatrix.rows, secondMatrix.columns);
-            if (firstMatrix.rows == secondMatrix.columns)
+            MyMatrix<T> result = new MyMatrix<T>(firstMatrix.rows,secondMatrix.columns);
+            for (int i = 0; i < firstMatrix.rows; i++)
             {
-                MyMatrix<T> temp = new MyMatrix<T>(firstMatrix.rows, secondMatrix.columns);
-                for (int i = 0; i < firstMatrix.rows; i++)
+                for (int j = 0; j < secondMatrix.columns; j++)
                 {
-                    for (int j = 0; j < secondMatrix.columns; j++)
+                    T[] instance = new T[firstMatrix.rows];
+                    instance[0] = new T();
+                    for (int k = 0; k < secondMatrix.rows; k++)
                     {
-                        MyMatrix<T> sum = new MyMatrix<T>(1, 1);
-                        //Tu nie działa!
-                        sum.matrix[0, 0] = 0;
-                        for (int k = 0; k < firstMatrix.columns; k++)
-                        {
-                            Console.WriteLine("Wynik przed = {0}", sum.matrix[0, 0]);
-                            sum.matrix[0,0] = (dynamic)firstMatrix.matrix[i, k] * (dynamic)secondMatrix.matrix[k, j];
-                            Console.WriteLine("A[row,column]={0},{1} * B[row,column]={2},{3} = {4}", i, k, k, j, sum.matrix[0, 0]);
-                            sum.matrix[0, 0] = (dynamic)sum.matrix[0, 0] + (dynamic)sum.matrix[0, 0];
-                            Console.WriteLine("Wynik po = {0}",sum.matrix[0, 0]);
-                        }
-                        temp.matrix[i, j] = sum.matrix[0,0];
+                        instance[0] = (dynamic)instance[0] + (dynamic)firstMatrix.matrix[i, k] * (dynamic)secondMatrix.matrix[k, j];
                     }
+                    result.matrix[i, j] = (dynamic)instance[0];
                 }
-                return temp;
             }
-            return new MyMatrix<T>(1, 1);
+            return result;
         }
 
         public void complementMatrix(T[,] table)

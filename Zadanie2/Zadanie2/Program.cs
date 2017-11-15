@@ -15,44 +15,29 @@ namespace Zadanie2
             //Console.WriteLine("Multiply result: Nominator: {0}, Denominator: {1}", resultMultiply.numerator, resultMultiply.denominator);
             //Console.WriteLine("Add result: Nominator: {0}, Denominator {1}", resutlAdd.numerator, resutlAdd.denominator);
 
-            MyMatrix<double> addDoubleMatrix = new MyMatrix<double>(3, 4);
-            MyMatrix<double> multiplyDoubleMatrix = new MyMatrix<double>(4, 3);
-            MyMatrix<MyFraction> addFractionMatrix = new MyMatrix<MyFraction>(3, 4);
-            MyMatrix<MyFraction> multiplyFractionMatrix = new MyMatrix<MyFraction>(4, 3);
+            MyMatrix<double> addDoubleMatrix = new MyMatrix<double>(4,4);
+            MyMatrix<double> multiplyDoubleMatrix = new MyMatrix<double>(4, 4);
+            MyMatrix<MyFraction> addFractionMatrix = new MyMatrix<MyFraction>(4, 4);
+            MyMatrix<MyFraction> multiplyFractionMatrix = new MyMatrix<MyFraction>(4, 4);
 
-            MyFraction[,] tableSample = new MyFraction[3, 4];
-            MyFraction[,] tableSample2 = new MyFraction[4, 3];
-            double[,] doubleTable = new double[3, 4];
-            double[,] doubleTable2 = new double[4, 3];
+            MyFraction[,] tableSample = new MyFraction[4, 4];
+            double[,] doubleTable = new double[4, 4];
 
             int count = 1;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    tableSample[i, j] = new MyFraction(count,count+2);
-                    doubleTable[i, j] = count+0.3;
+                    tableSample[i, j] = new MyFraction(1,2);
+                    doubleTable[i, j] = 0.5;
                     count++;
 
                 }
             }
-
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    tableSample2[i, j] = new MyFraction(count+1,count/2);
-                    doubleTable2[i, j] = count + 0.3;
-                    count++;
-
-                }
-            }
-
-            tableSample[0, 0] = new MyFraction(2, 3);
             addFractionMatrix.complementMatrix(tableSample);
-            multiplyFractionMatrix.complementMatrix(tableSample2);
+            multiplyFractionMatrix.complementMatrix(tableSample);
             addDoubleMatrix.complementMatrix(doubleTable);
-            multiplyDoubleMatrix.complementMatrix(doubleTable2);
+            multiplyDoubleMatrix.complementMatrix(doubleTable);
 
             Console.WriteLine("First add double Matrix:");
             addDoubleMatrix.printMatrix();
