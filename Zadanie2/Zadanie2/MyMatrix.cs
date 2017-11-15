@@ -50,6 +50,23 @@ namespace Zadanie2
             return result;
         }
 
+        public static T[] operator *(MyMatrix<T> firstMatrix, T[] vector)
+        {
+            T[] instance = new T[firstMatrix.rows];
+            for (int i = 0; i < firstMatrix.rows; i++)
+            {
+                instance[i] = new T();
+            }
+            for (int i = 0; i < firstMatrix.rows; i++)
+            {
+                for (int j = 0; j < firstMatrix.columns; j++)
+                {
+                    instance[i] += (dynamic)firstMatrix.matrix[i, j] * (dynamic)vector[j];
+                }
+            }
+            return instance;
+        }
+
         public void complementMatrix(T[,] table)
         {
             for (int i = 0; i < rows; i++)

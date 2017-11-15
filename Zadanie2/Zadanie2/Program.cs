@@ -17,8 +17,10 @@ namespace Zadanie2
 
             MyMatrix<double> addDoubleMatrix = new MyMatrix<double>(4,4);
             MyMatrix<double> multiplyDoubleMatrix = new MyMatrix<double>(4, 4);
+            double[] multiplyDoubleVector = new double[4];
             MyMatrix<MyFraction> addFractionMatrix = new MyMatrix<MyFraction>(4, 4);
             MyMatrix<MyFraction> multiplyFractionMatrix = new MyMatrix<MyFraction>(4, 4);
+            MyFraction[] multiplyFractionVector = new MyFraction[4];
 
             MyFraction[,] tableSample = new MyFraction[4, 4];
             double[,] doubleTable = new double[4, 4];
@@ -30,6 +32,8 @@ namespace Zadanie2
                 {
                     tableSample[i, j] = new MyFraction(1,2);
                     doubleTable[i, j] = 0.5;
+                    multiplyDoubleVector[j] = 0.5;
+                    multiplyFractionVector[j] = new MyFraction(1, 2);
                     count++;
 
                 }
@@ -43,9 +47,8 @@ namespace Zadanie2
             addDoubleMatrix.printMatrix();
             Console.WriteLine("Second add double Matrix:");
             addDoubleMatrix.printMatrix();
-            MyMatrix<double> addResult = addDoubleMatrix + addDoubleMatrix;
-            MyMatrix<double> multiplyResult = addDoubleMatrix * multiplyDoubleMatrix;
             Console.WriteLine("Add result double Matrix:");
+            MyMatrix<double> addResult = addDoubleMatrix + addDoubleMatrix;
             addResult.printMatrix();
 
             Console.WriteLine("------ ------");
@@ -55,7 +58,24 @@ namespace Zadanie2
             Console.WriteLine("Second multiply double Matrix:");
             multiplyDoubleMatrix.printMatrix();
             Console.WriteLine("Multiply result double Matrix:");
+            MyMatrix<double> multiplyResult = addDoubleMatrix * multiplyDoubleMatrix;
             multiplyResult.printMatrix();
+
+            Console.WriteLine("------ ------");
+
+            Console.WriteLine("First multiply double Matrix:");
+            addDoubleMatrix.printMatrix();
+            Console.WriteLine("Double Vector:");
+            foreach (var item in multiplyDoubleVector)
+            {
+                Console.WriteLine(item.ToString());
+            }
+            Console.WriteLine("Multiply result double Vector:");
+            double[] multiplyDoubleByVectorResult = addDoubleMatrix * multiplyDoubleVector;
+            foreach (var item in multiplyDoubleByVectorResult)
+            {
+                Console.WriteLine(item.ToString());
+            }
 
             Console.WriteLine("------ ------");
 
@@ -76,6 +96,22 @@ namespace Zadanie2
             Console.WriteLine("Multiply result fraction Matrix:");
             MyMatrix<MyFraction> multiplyResultMatrix = addFractionMatrix * multiplyFractionMatrix;
             multiplyResultMatrix.printMatrix();
+
+            Console.WriteLine("------ ------");
+
+            Console.WriteLine("First multiply fraction Matrix:");
+            addFractionMatrix.printMatrix();
+            Console.WriteLine("Multiply Fraction Vector:");
+            foreach (var item in multiplyFractionVector)
+            {
+                Console.WriteLine(item.ToString());
+            }
+            Console.WriteLine("Multiply result Fraction Vector:");
+            MyFraction[] multiplyFractionByVectorResult = addFractionMatrix * multiplyFractionVector;
+            foreach (var item in multiplyFractionByVectorResult)
+            {
+                Console.WriteLine(item.ToString());
+            }
             Console.ReadLine();
 
         }
