@@ -4,10 +4,10 @@ namespace Zadanie2
 {
     public class MyMatrix<T> where T : new()
     {
-        private int rows;
-        private int columns;
-        private T[,] matrix;
-        private T[,] defaultMatrix;
+        public int rows;
+        public int columns;
+        public T[,] matrix;
+        public T[,] defaultMatrix;
 
         public MyMatrix(int rows, int columns)
         {
@@ -93,7 +93,7 @@ namespace Zadanie2
                     {
                         Console.Write("| ");
                     }
-                    String s = String.Format("{0,-20:C5}", matrix[i,j]);
+                    String s = String.Format("{0}", matrix[i,j]);
                     Console.Write(s);
 
                 }
