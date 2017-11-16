@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Zadanie2
 {
-    public struct MyFraction
+    public class MyFraction
     {
         public BigInteger numerator { get; }
         public BigInteger denominator { get; }
@@ -12,6 +12,12 @@ namespace Zadanie2
         {
             this.numerator = numerator;
             this.denominator = denominator;
+        }
+
+        public MyFraction()
+        {
+            numerator = 0;
+            denominator = 1;
         }
 
         public MyFraction(BigInteger numerator)
