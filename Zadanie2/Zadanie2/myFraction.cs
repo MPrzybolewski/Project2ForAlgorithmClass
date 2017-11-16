@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Zadanie2
 {
-    public class MyFraction
+    public struct MyFraction
     {
         public BigInteger numerator { get; }
         public BigInteger denominator { get; }
@@ -62,6 +62,33 @@ namespace Zadanie2
                 return true;
             }
             else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator >(MyFraction firstFraction, MyFraction secondFratcion)
+        {
+            double firstFractionValue = (double)firstFraction.numerator / (double)firstFraction.denominator;
+            double secondFractionValue = (double)secondFratcion.numerator / (double)secondFratcion.denominator;
+            if (firstFractionValue > secondFractionValue)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator <(MyFraction firstFraction, MyFraction secondFraction)
+        {
+            double firstFractionValue = (double)firstFraction.numerator / (double)firstFraction.denominator;
+            double secondFractionValue = (double)secondFraction.numerator / (double)secondFraction.denominator;
+            if (firstFractionValue < secondFractionValue)
+            {
+                return true;
+            } else 
             {
                 return false;
             }
