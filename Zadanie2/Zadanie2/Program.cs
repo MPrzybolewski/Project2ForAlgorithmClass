@@ -107,7 +107,6 @@ namespace Zadanie2
             {
                 Console.WriteLine(item.ToString());
             }
-            Console.ReadLine();
 
 
             //Test Gaussa   
