@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Numerics;
 
 namespace Zadanie2
 {
@@ -93,7 +95,7 @@ namespace Zadanie2
                     {
                         Console.Write("| ");
                     }
-                    String s = String.Format("{0}", matrix[i,j]);
+                    String s = String.Format("{0:N3}", matrix[i,j]);
                     Console.Write(s);
 
                 }
@@ -104,22 +106,27 @@ namespace Zadanie2
         public T[] gaussWithoutChoice(T[] bVector)
         {
             bVector = makeRowEchelonMatrix(bVector);
-            return countXVector(bVector);
+            T[] xVector = countXVector(bVector);
+            setDefaultMatrix();
+            return xVector;
         }
 
 
         public T[] gaussWithRowChoice(T[] bVector)
         {
             bVector = makeRowEchelonMatrixWithRowChoice(bVector);
-            return countXVector(bVector);
+            T[] xVector = countXVector(bVector);
+            setDefaultMatrix();
+            return xVector;
         }
 
         public T[] gaussWithFullChoice(T[] bVector)
         {
             int[] xVectorNumberChangeTable = {1,2,3,4};
             bVector = makeRowEchelonMatrixWithFullChoice(bVector, xVectorNumberChangeTable);
-            return countModifiedXVector(bVector,xVectorNumberChangeTable);
-
+            T[] xVector = countModifiedXVector(bVector,xVectorNumberChangeTable);
+            setDefaultMatrix();
+            return xVector;
         }
 
         private T[] makeRowEchelonMatrix(T[] bVector)
@@ -334,5 +341,55 @@ namespace Zadanie2
         {
             matrix = (T[,])defaultMatrix.Clone();
         }
+        
+        public void WriteMatrixToFile(string name)
+        {
+            if (!name.Contains("Result"))
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                        {
+                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(" ");
+                        }
+                    }
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                    {
+                        file.Write("\n");
+                    }
+                }
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                {
+                    file.Write("*** *** *** *** *** ***\n");
+                } 
+            }
+            else
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                        {
+                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(" ");
+                        }
+                    }
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                    {
+                        file.Write("\n");
+                    }
+                }
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                {
+                    file.Write("*** *** *** *** *** ***\n");
+                }
+            }
+            
+        }
+
     }
 }
