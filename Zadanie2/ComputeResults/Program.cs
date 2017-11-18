@@ -57,7 +57,7 @@ namespace ComputeResults
             double sum = 0;
             for(int i = 0; i < size; i++)
             {
-                temp[i] = doubleResult[i] - fractionResult[i];
+                temp[i] = fractionResult[i] - doubleResult[i];
                 temp[i] *= temp[i];
                 sum += temp[i];
             }
@@ -73,7 +73,7 @@ namespace ComputeResults
             double sum = 0;
             for (int i = 0; i < size; i++)
             {
-                temp[i] = (Double)floatResult[i] - fractionResult[i];
+                temp[i] = fractionResult[i] - floatResult[i];
                 temp[i] *= temp[i];
                 sum += temp[i];
             }
