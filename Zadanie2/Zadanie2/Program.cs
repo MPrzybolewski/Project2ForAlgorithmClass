@@ -100,10 +100,10 @@ namespace Zadanie2
                         }
 
                     }
+
                     firstMatrix.complementMatrix(firstMatrixTable);
                     secondMatrix.complementMatrix(secondMatrixTable);
                     thirdMatrix.complementMatrix(thirdMatrixTable);
-
 
                     firstMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
                     secondMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
@@ -141,24 +141,34 @@ namespace Zadanie2
                     float[] fourthResult = new float[size];
                     float[] fifthResult = new float[size];
                     float[] sixthResult = new float[size];
+
+                    float[,] firstMatrixTable = new float[size, size];
+                    float[,] secondMatrixTable = new float[size, size];
+                    float[,] thirdMatrixTable = new float[size, size];
+
                     for (int j = 0; j < size; j++)
                     {
                         for (int k = 0; k < size; k++)
                         {
                             int a = rand.Next(1, 10);
                             int b = rand.Next(1, 10);
-                            firstMatrix.matrix[j,k] = (float)a/b;
+                            firstMatrixTable[j,k] = (float)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            secondMatrix.matrix[j,k] = (float)a/b;
+                            secondMatrixTable[j,k] = (float)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            thirdMatrix.matrix[j,k] = (float)a/b;
+                            thirdMatrixTable[j,k] = (float)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
                             firstVector[j] = (float)a/b;
                         }
                     }
+
+                    firstMatrix.complementMatrix(firstMatrixTable);
+                    secondMatrix.complementMatrix(secondMatrixTable);
+                    thirdMatrix.complementMatrix(thirdMatrixTable);
+
                     firstMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
                     secondMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
                     thirdMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
@@ -166,13 +176,13 @@ namespace Zadanie2
                     firstResult = firstMatrix * firstVector;
                     secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
                     thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-//                    Console.WriteLine("Przed Gaussem");
-//                    fourthResult = firstMatrix.gaussWithoutChoice((float[])firstVector.Clone());
-//                    Console.WriteLine("Po 1");
-//                    fifthResult = firstMatrix.gaussWithRowChoice((float[])firstVector.Clone());
-//                    Console.WriteLine("Po 2");
-//                    sixthResult = firstMatrix.gaussWithFullChoice((float[])firstVector.Clone());
-//                    Console.WriteLine("Po 3");
+                    Console.WriteLine("Przed Gaussem");
+                    fourthResult = firstMatrix.gaussWithoutChoice((float[])firstVector.Clone());
+                    Console.WriteLine("Po 1");
+                    fifthResult = firstMatrix.gaussWithRowChoice((float[])firstVector.Clone());
+                    Console.WriteLine("Po 2");
+                    sixthResult = firstMatrix.gaussWithFullChoice((float[])firstVector.Clone());
+                    Console.WriteLine("Po 3");
                     
                     WriteVectorToFile(firstResult, "(AxX)DataResultFloat");
                     WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultFloat");
@@ -194,24 +204,34 @@ namespace Zadanie2
                     double[] fourthResult = new double[size];
                     double[] fifthResult = new double[size];
                     double[] sixthResult = new double[size];
+
+                    double[,] firstMatrixTable = new double[size, size];
+                    double[,] secondMatrixTable = new double[size, size];
+                    double[,] thirdMatrixTable = new double[size, size];
+
                     for (int j = 0; j < size; j++)
                     {
                         for (int k = 0; k < size; k++)
                         {
                             int a = rand.Next(1, 10);
                             int b = rand.Next(1, 10);
-                            firstMatrix.matrix[j,k] = (double)a/b;
+                            firstMatrixTable[j,k] = (double)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            secondMatrix.matrix[j,k] = (double)a/b;
+                            secondMatrixTable[j,k] = (double)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            thirdMatrix.matrix[j,k] = (double)a/b;
+                            thirdMatrixTable[j,k] = (double)a/b;
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
                             firstVector[j] = (double)a/b;
                         }
                     }
+
+                    firstMatrix.complementMatrix(firstMatrixTable);
+                    secondMatrix.complementMatrix(secondMatrixTable);
+                    thirdMatrix.complementMatrix(thirdMatrixTable);
+
                     firstMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
                     secondMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
                     thirdMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
@@ -219,13 +239,13 @@ namespace Zadanie2
                     firstResult = firstMatrix * firstVector;
                     secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
                     thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-//                    Console.WriteLine("Przed Gaussem");
-//                    fourthResult = firstMatrix.gaussWithoutChoice((double[])firstVector.Clone());
-//                    Console.WriteLine("Po 1");
-//                    fifthResult = firstMatrix.gaussWithRowChoice((double[])firstVector.Clone());
-//                    Console.WriteLine("Po 2");
-//                    sixthResult = firstMatrix.gaussWithFullChoice((double[])firstVector.Clone());
-//                    Console.WriteLine("Po 3");
+                    Console.WriteLine("Przed Gaussem");
+                    fourthResult = firstMatrix.gaussWithoutChoice((double[])firstVector.Clone());
+                    Console.WriteLine("Po 1");
+                    fifthResult = firstMatrix.gaussWithRowChoice((double[])firstVector.Clone());
+                    Console.WriteLine("Po 2");
+                    sixthResult = firstMatrix.gaussWithFullChoice((double[])firstVector.Clone());
+                    Console.WriteLine("Po 3");
                     
                     WriteVectorToFile(firstResult, "(AxX)DataResultDouble");
                     WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultDouble");
