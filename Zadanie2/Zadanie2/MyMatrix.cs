@@ -380,7 +380,7 @@ namespace Zadanie2
                     {
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N16}", matrix[i,j]));
+                            file.Write(String.Format("{0:00.0000000000000000}", matrix[i, j]));
                             file.Write(" ");
                         }
                     }
@@ -402,7 +402,9 @@ namespace Zadanie2
                     {
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N16}", matrix[i,j]));
+                            //string s = matrix[i, j].ToString();
+                            //s.Replace(" ", "");
+                            file.Write(String.Format("{0:00.0000000000000000}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
