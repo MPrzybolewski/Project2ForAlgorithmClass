@@ -370,24 +370,26 @@ namespace Zadanie2
         
         public void WriteMatrixToFile(string name)
         {
+            string source = "D:\\Projekty\\Algorytmy\\Data\\";
+
             if (!name.Contains("Result"))
             {
                 for (int i = 0; i < rows; i++)
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(String.Format("{0:N16}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                     {
                         file.Write("\n");
                     }
                 }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                 {
                     file.Write("*** *** *** *** *** ***\n");
                 } 
@@ -398,18 +400,18 @@ namespace Zadanie2
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(String.Format("{0:N16}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                     {
                         file.Write("\n");
                     }
                 }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                 {
                     file.Write("*** *** *** *** *** ***\n");
                 }

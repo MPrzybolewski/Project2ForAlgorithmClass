@@ -108,7 +108,7 @@ namespace Zadanie2
 
         public override string ToString()
         {
-            return string.Format("{0:N3}", (double)numerator / (double)denominator);
+            return string.Format("{0:N16}", (double)numerator / (double)denominator);
         }
 
         public static bool operator <(MyFraction firstFraction, MyFraction secondFraction)

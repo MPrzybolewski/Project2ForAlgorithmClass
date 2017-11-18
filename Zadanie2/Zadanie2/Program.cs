@@ -7,267 +7,238 @@ namespace Zadanie2
 {
     class MainClass
     {
+        public static string source = "D:\\Projekty\\Algorytmy\\Data\\";
+
         public static void CleanFiles()
         {
             int i = 1;
             while (i <= 3)
             {
-                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeDouble" + i+".txt", "");
-                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeFloat" + i+".txt", "");
-                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeFactorial" + i+".txt", "");
+                System.IO.File.WriteAllText(source + "DataRange\\DataRangeDouble" + i + ".txt", "");
+                System.IO.File.WriteAllText(source + "DataRange\\DataRangeFloat" + i + ".txt", "");
+                System.IO.File.WriteAllText(source + "DataRange\\DataRangeFraction" + i + ".txt", "");
                 i++;
             }
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFactorial.txt", "");
-            
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFloat.txt", "");
-            
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultDouble.txt", "");
-            
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFactorial.txt", "");
-            
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFloat.txt", "");
-            
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussDouble.txt", "");
-            
+            System.IO.File.WriteAllText(source + "Results\\(AxX)DataResultFraction.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(A+B+C)x(X)DataResultFraction.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(Ax(BxC))DataResultFraction.txt", "");
+
+            System.IO.File.WriteAllText(source + "Results\\(AxX)DataResultFloat.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(A+B+C)x(X)DataResultFloat.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(Ax(BxC))DataResultFloat.txt", "");
+
+            System.IO.File.WriteAllText(source + "Results\\(AxX)DataResultDouble.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(A+B+C)x(X)DataResultDouble.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\(Ax(BxC))DataResultDouble.txt", "");
+
+            System.IO.File.WriteAllText(source + "Results\\NoChoiceGaussFraction.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\RowChoiceGaussFraction.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\FullChoiceGaussFraction.txt", "");
+
+            System.IO.File.WriteAllText(source + "Results\\NoChoiceGaussFloat.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\RowChoiceGaussFloat.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\FullChoiceGaussFloat.txt", "");
+
+            System.IO.File.WriteAllText(source + "Results\\NoChoiceGaussDouble.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\RowChoiceGaussDouble.txt", "");
+            System.IO.File.WriteAllText(source + "Results\\FullChoiceGaussDouble.txt", "");
+
         }
 
         public static void WriteVectorToFile<T>(T[] vector, string name)
         {
             for (int i = 0; i < vector.Length; i++)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "Results\\" + name + ".txt", true))
                 {
-                    file.WriteLine(String.Format("{0:N3}", vector[i]));
+                    file.WriteLine(String.Format("{0:N16}", vector[i]));
                 }
             }
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "Results\\" + name + ".txt", true))
             {
                 file.Write("*** *** *** *** *** ***\n");
             }
         }
-        
-        public static void ComputeAll<T>(int size)
+
+        public static void ComputeAll(int size)
         {
             int i = 1;
             while (i <= 3)
             {
+                Console.WriteLine("Przed {0}", i);
                 Random rand = new Random();
-                T[] temp = new T[10];
-                Type t = temp.GetType();
-                if (t.ToString() == typeof(MyFraction) + "[]")
+                MyMatrix<MyFraction> firstFractionMatrix = new MyMatrix<MyFraction>(size, size);
+                MyMatrix<MyFraction> secondFractionMatrix = new MyMatrix<MyFraction>(size, size);
+                MyMatrix<MyFraction> thirdFractionMatrix = new MyMatrix<MyFraction>(size, size);
+                MyFraction[,] firstFractionTable = new MyFraction[size, size];
+                MyFraction[,] secondFractionTable = new MyFraction[size, size];
+                MyFraction[,] thirdFractionTable = new MyFraction[size, size];
+                MyFraction[] firstFractionVector = new MyFraction[size];
+                MyFraction[] firstFractionResult = new MyFraction[size];
+                MyFraction[] secondFractionResult = new MyFraction[size];
+                MyMatrix<MyFraction> thirdFractionResult = new MyMatrix<MyFraction>(size, size);
+                MyFraction[] fourthFractionResult = new MyFraction[size];
+                MyFraction[] fifthFractionResult = new MyFraction[size];
+                MyFraction[] sixthFractionResult = new MyFraction[size];
+                MyMatrix<float> firstFloatMatrix = new MyMatrix<float>(size, size);
+                MyMatrix<float> secondFloatMatrix = new MyMatrix<float>(size, size);
+                MyMatrix<float> thirdFloatMatrix = new MyMatrix<float>(size, size);
+                float[,] firstFloatTable = new float[size, size];
+                float[,] secondFloatTable = new float[size, size];
+                float[,] thirdFloatTable = new float[size, size];
+                float[] firstFloatVector = new float[size];
+                float[] firstFloatResult = new float[size];
+                float[] secondFloatResult = new float[size];
+                MyMatrix<float> thirdFloatResult = new MyMatrix<float>(size, size);
+                float[] fourthFloatResult = new float[size];
+                float[] fifthFloatResult = new float[size];
+                float[] sixthFloatResult = new float[size];
+                MyMatrix<double> firstDoubleMatrix = new MyMatrix<double>(size, size);
+                MyMatrix<double> secondDoubleMatrix = new MyMatrix<double>(size, size);
+                MyMatrix<double> thirdDoubleMatrix = new MyMatrix<double>(size, size);
+                double[,] firstDoubleTable = new double[size, size];
+                double[,] secondDoubleTable = new double[size, size];
+                double[,] thirdDoubleTable = new double[size, size];
+                double[] firstDoubleVector = new double[size];
+                double[] firstDoubleResult = new double[size];
+                double[] secondDoubleResult = new double[size];
+                MyMatrix<double> thirdDoubleResult = new MyMatrix<double>(size, size);
+                double[] fourthDoubleResult = new double[size];
+                double[] fifthDoubleResult = new double[size];
+                double[] sixthDoubleResult = new double[size];
+                for (int j = 0; j < size; j++)
                 {
-                    MyMatrix<MyFraction> firstMatrix = new MyMatrix<MyFraction>(size, size);
-                    MyMatrix<MyFraction> secondMatrix = new MyMatrix<MyFraction>(size, size);
-                    MyMatrix<MyFraction> thirdMatrix = new MyMatrix<MyFraction>(size, size);
-                    MyFraction[] firstVector = new MyFraction[size];
-                    MyFraction[] firstResult = new MyFraction[size];
-                    MyFraction[] secondResult = new MyFraction[size];
-                    MyMatrix<MyFraction> thirdResult = new MyMatrix<MyFraction>(size, size);
-                    MyFraction[] fourthResult = new MyFraction[size];
-                    MyFraction[] fifthResult = new MyFraction[size];
-                    MyFraction[] sixthResult = new MyFraction[size];
-                    MyFraction[,] firstMatrixTable = new MyFraction[size, size];
-                    MyFraction[,] secondMatrixTable = new MyFraction[size, size];
-                    MyFraction[,] thirdMatrixTable = new MyFraction[size, size];
-                    for (int j = 0; j < size; j++)
+                    for (int k = 0; k < size; k++)
                     {
-                        for (int k = 0; k < size; k++)
-                        {
-                            int a = rand.Next(1, 10);
-                            int b = rand.Next(1, 10);
-                            firstMatrixTable[j, k] = new MyFraction(a);
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            secondMatrixTable[j, k] = new MyFraction(a);
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            thirdMatrixTable[j, k] = new MyFraction(a);
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            firstVector[j] = new MyFraction(a);
-                        }
-
+                        int a = rand.Next(1, 10);
+                        int b = rand.Next(1, 10);
+                        firstFractionTable[j,k] = new MyFraction(a, b);                    
+                        firstFractionVector[j] = new MyFraction(a, b);
+                        firstFloatTable[j, k] = (float)a / b;                  
+                        firstFloatVector[j] = (float)a / b;
+                        firstDoubleTable[j, k] = (double)a / b;
+                        firstDoubleVector[j] = (double)a / b;
                     }
 
-                    firstMatrix.complementMatrix(firstMatrixTable);
-                    secondMatrix.complementMatrix(secondMatrixTable);
-                    thirdMatrix.complementMatrix(thirdMatrixTable);
-
-                    firstMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
-                    secondMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
-                    thirdMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
-
-                    firstResult = firstMatrix * firstVector;
-                    secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
-                    thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-
-                    Console.WriteLine("Przed Gaussem");
-                    fourthResult = firstMatrix.gaussWithoutChoice((MyFraction[])firstVector.Clone());
-                    Console.WriteLine("Po 1");
-                    fifthResult = firstMatrix.gaussWithRowChoice((MyFraction[])firstVector.Clone());
-                    Console.WriteLine("Po 2");
-                    sixthResult = firstMatrix.gaussWithFullChoice((MyFraction[])firstVector.Clone());
-                    Console.WriteLine("Po 3");
-                    
-                    WriteVectorToFile(firstResult, "(AxX)DataResultFactorial");
-                    WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultFactorial");
-                    thirdResult.WriteMatrixToFile("(Ax(BxC))DataResultFactorial");
-                    WriteVectorToFile(fourthResult, "NoChoiceGaussFactorial");
-                    WriteVectorToFile(fifthResult, "RowChoiceGaussFactorial");
-                    WriteVectorToFile(sixthResult, "FullChoiceGaussFactorial");
                 }
-                else if (t.ToString() == typeof(float) + "[]")
+
+                for (int j = 0; j < size; j++)
                 {
-                    MyMatrix<float> firstMatrix = new MyMatrix<float>(size,size);
-                    MyMatrix<float> secondMatrix = new MyMatrix<float>(size,size);
-                    MyMatrix<float> thirdMatrix = new MyMatrix<float>(size,size);
-                    float[] firstVector = new float[size];
-                    float[] firstResult = new float[size];
-                    float[] secondResult = new float[size];
-                    MyMatrix<float> thirdResult = new MyMatrix<float>(size,size);
-                    float[] fourthResult = new float[size];
-                    float[] fifthResult = new float[size];
-                    float[] sixthResult = new float[size];
-
-                    float[,] firstMatrixTable = new float[size, size];
-                    float[,] secondMatrixTable = new float[size, size];
-                    float[,] thirdMatrixTable = new float[size, size];
-
-                    for (int j = 0; j < size; j++)
+                    for (int k = 0; k < size; k++)
                     {
-                        for (int k = 0; k < size; k++)
-                        {
-                            int a = rand.Next(1, 10);
-                            int b = rand.Next(1, 10);
-                            firstMatrixTable[j,k] = (float)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            secondMatrixTable[j,k] = (float)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            thirdMatrixTable[j,k] = (float)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            firstVector[j] = (float)a/b;
-                        }
+                        int a = rand.Next(1, 10);
+                        int b = rand.Next(1, 10);
+                        secondFractionTable[j, k] = new MyFraction(a, b);
+                        secondFloatTable[j, k] = (float)a / b;
+                        secondDoubleTable[j, k] = (double)a / b;
                     }
 
-                    firstMatrix.complementMatrix(firstMatrixTable);
-                    secondMatrix.complementMatrix(secondMatrixTable);
-                    thirdMatrix.complementMatrix(thirdMatrixTable);
-
-                    firstMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
-                    secondMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
-                    thirdMatrix.WriteMatrixToFile("DataRangeFloat"+i.ToString());
-                    
-                    firstResult = firstMatrix * firstVector;
-                    secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
-                    thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-                    Console.WriteLine("Przed Gaussem");
-                    fourthResult = firstMatrix.gaussWithoutChoice((float[])firstVector.Clone());
-                    Console.WriteLine("Po 1");
-                    fifthResult = firstMatrix.gaussWithRowChoice((float[])firstVector.Clone());
-                    Console.WriteLine("Po 2");
-                    sixthResult = firstMatrix.gaussWithFullChoice((float[])firstVector.Clone());
-                    Console.WriteLine("Po 3");
-                    
-                    WriteVectorToFile(firstResult, "(AxX)DataResultFloat");
-                    WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultFloat");
-                    thirdResult.WriteMatrixToFile("(Ax(BxC))DataResultFloat");
-                    WriteVectorToFile(fourthResult, "NoChoiceGaussFloat");
-                    WriteVectorToFile(fifthResult, "RowChoiceGaussFloat");
-                    WriteVectorToFile(sixthResult, "FullChoiceGaussFloat");
-                    
                 }
-                else
+
+                for (int j = 0; j < size; j++)
                 {
-                    MyMatrix<double> firstMatrix = new MyMatrix<double>(size,size);
-                    MyMatrix<double> secondMatrix = new MyMatrix<double>(size,size);
-                    MyMatrix<double> thirdMatrix = new MyMatrix<double>(size,size);
-                    double[] firstVector = new double[size];
-                    double[] firstResult = new double[size];
-                    double[] secondResult = new double[size];
-                    MyMatrix<double> thirdResult = new MyMatrix<double>(size,size);
-                    double[] fourthResult = new double[size];
-                    double[] fifthResult = new double[size];
-                    double[] sixthResult = new double[size];
-
-                    double[,] firstMatrixTable = new double[size, size];
-                    double[,] secondMatrixTable = new double[size, size];
-                    double[,] thirdMatrixTable = new double[size, size];
-
-                    for (int j = 0; j < size; j++)
+                    for (int k = 0; k < size; k++)
                     {
-                        for (int k = 0; k < size; k++)
-                        {
-                            int a = rand.Next(1, 10);
-                            int b = rand.Next(1, 10);
-                            firstMatrixTable[j,k] = (double)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            secondMatrixTable[j,k] = (double)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            thirdMatrixTable[j,k] = (double)a/b;
-                            a = rand.Next(1, 10);
-                            b = rand.Next(1, 10);
-                            firstVector[j] = (double)a/b;
-                        }
+                        int a = rand.Next(1, 10);
+                        int b = rand.Next(1, 10);
+                        thirdFractionTable[j, k] = new MyFraction(a, b);
+                        thirdFloatTable[j, k] = (float)a / b;
+                        thirdDoubleTable[j, k] = (double)a / b;
                     }
 
-                    firstMatrix.complementMatrix(firstMatrixTable);
-                    secondMatrix.complementMatrix(secondMatrixTable);
-                    thirdMatrix.complementMatrix(thirdMatrixTable);
-
-                    firstMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
-                    secondMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
-                    thirdMatrix.WriteMatrixToFile("DataRangeDouble"+i.ToString());
-                    
-                    firstResult = firstMatrix * firstVector;
-                    secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
-                    thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-                    Console.WriteLine("Przed Gaussem");
-                    fourthResult = firstMatrix.gaussWithoutChoice((double[])firstVector.Clone());
-                    Console.WriteLine("Po 1");
-                    fifthResult = firstMatrix.gaussWithRowChoice((double[])firstVector.Clone());
-                    Console.WriteLine("Po 2");
-                    sixthResult = firstMatrix.gaussWithFullChoice((double[])firstVector.Clone());
-                    Console.WriteLine("Po 3");
-                    
-                    WriteVectorToFile(firstResult, "(AxX)DataResultDouble");
-                    WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultDouble");
-                    thirdResult.WriteMatrixToFile("(Ax(BxC))DataResultDouble");
-                    WriteVectorToFile(fourthResult, "NoChoiceGaussDouble");
-                    WriteVectorToFile(fifthResult, "RowChoiceGaussDouble");
-                    WriteVectorToFile(sixthResult, "FullChoiceGaussDouble");
                 }
+
+                firstFractionMatrix.complementMatrix(firstFractionTable);
+                secondFractionMatrix.complementMatrix(secondFractionTable);
+                thirdFractionMatrix.complementMatrix(thirdFractionTable);
+                firstFloatMatrix.complementMatrix(firstFloatTable);
+                secondFloatMatrix.complementMatrix(secondFloatTable);
+                thirdFloatMatrix.complementMatrix(thirdFloatTable);
+                firstDoubleMatrix.complementMatrix(firstDoubleTable);
+                secondDoubleMatrix.complementMatrix(secondDoubleTable);
+                thirdDoubleMatrix.complementMatrix(thirdDoubleTable);
+
+
+                Console.WriteLine("Po forze {0}", i);
+                firstFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
+                secondFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
+                thirdFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
+
+                firstFractionResult = firstFractionMatrix * firstFractionVector;
+                secondFractionResult = (firstFractionMatrix + secondFractionMatrix + thirdFractionMatrix) * firstFractionVector;
+                thirdFractionResult = firstFractionMatrix * (secondFractionMatrix * thirdFractionMatrix);
+                Console.WriteLine("Przed Gaussem");
+                fourthFractionResult = firstFractionMatrix.gaussWithoutChoice((MyFraction[])firstFractionVector.Clone());
+                Console.WriteLine("Po 1");
+                fifthFractionResult = firstFractionMatrix.gaussWithRowChoice((MyFraction[])firstFractionVector.Clone());
+                Console.WriteLine("Po 2");
+                sixthFractionResult = firstFractionMatrix.gaussWithFullChoice((MyFraction[])firstFractionVector.Clone());
+                Console.WriteLine("Po 3");
+
+                WriteVectorToFile(firstFractionResult, "(AxX)DataResultFraction");
+                WriteVectorToFile(secondFractionResult, "(A+B+C)x(X)DataResultFraction");
+                thirdFractionResult.WriteMatrixToFile("(Ax(BxC))DataResultFraction");
+                WriteVectorToFile(fourthFractionResult, "NoChoiceGaussFraction");
+                WriteVectorToFile(fifthFractionResult, "RowChoiceGaussFraction");
+                WriteVectorToFile(sixthFractionResult, "FullChoiceGaussFraction");
+
+                firstFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
+                secondFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
+                thirdFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
+
+                firstFloatResult = firstFloatMatrix * firstFloatVector;
+                secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
+                thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
+                Console.WriteLine("Przed Gaussem");
+                fourthFloatResult = firstFloatMatrix.gaussWithoutChoice((float[])firstFloatVector.Clone());
+                Console.WriteLine("Po 1");
+                fifthFloatResult = firstFloatMatrix.gaussWithRowChoice((float[])firstFloatVector.Clone());
+                Console.WriteLine("Po 2");
+                sixthFloatResult = firstFloatMatrix.gaussWithFullChoice((float[])firstFloatVector.Clone());
+                Console.WriteLine("Po 3");
+
+                WriteVectorToFile(firstFloatResult, "(AxX)DataResultFloat");
+                WriteVectorToFile(secondFloatResult, "(A+B+C)x(X)DataResultFloat");
+                thirdFloatResult.WriteMatrixToFile("(Ax(BxC))DataResultFloat");
+                WriteVectorToFile(fourthFloatResult, "NoChoiceGaussFloat");
+                WriteVectorToFile(fifthFloatResult, "RowChoiceGaussFloat");
+                WriteVectorToFile(sixthFloatResult, "FullChoiceGaussFloat");
+
+                firstDoubleMatrix.WriteMatrixToFile("DataRangeDouble" + i.ToString());
+                secondDoubleMatrix.WriteMatrixToFile("DataRangeDouble" + i.ToString());
+                thirdDoubleMatrix.WriteMatrixToFile("DataRangeDouble" + i.ToString());
+
+                firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
+                secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
+                thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
+                Console.WriteLine("Przed Gaussem");
+                fourthDoubleResult = firstDoubleMatrix.gaussWithoutChoice((double[])firstDoubleVector.Clone());
+                Console.WriteLine("Po 1");
+                fifthDoubleResult = firstDoubleMatrix.gaussWithRowChoice((double[])firstDoubleVector.Clone());
+                Console.WriteLine("Po 2");
+                sixthDoubleResult = firstDoubleMatrix.gaussWithFullChoice((double[])firstDoubleVector.Clone());
+                Console.WriteLine("Po 3");
+
+                WriteVectorToFile(firstDoubleResult, "(AxX)DataResultDouble");
+                WriteVectorToFile(secondDoubleResult, "(A+B+C)x(X)DataResultDouble");
+                thirdDoubleResult.WriteMatrixToFile("(Ax(BxC))DataResultDouble");
+                WriteVectorToFile(fourthDoubleResult, "NoChoiceGaussDouble");
+                WriteVectorToFile(fifthDoubleResult, "RowChoiceGaussDouble");
+                WriteVectorToFile(sixthDoubleResult, "FullChoiceGaussDouble");
+                Console.WriteLine("koniec {0}", i);
                 i++;
             }
-            
+
         }
-        
-        
+
+
         public static void Main(string[] args)
         {
             CleanFiles();
-            ComputeAll<MyFraction>(10);
-            ComputeAll<float>(10);
-            ComputeAll<double>(10);
+            ComputeAll(10);
             Console.WriteLine("Done");
             Console.ReadKey();
         }
-     
+
     }
 }
