@@ -106,6 +106,7 @@ namespace Zadanie2
         public T[] gaussWithoutChoice(T[] bVector)
         {
             bVector = makeRowEchelonMatrix(bVector);
+            Console.WriteLine("Koniec liczenia b");
             T[] xVector = countXVector(bVector);
             setDefaultMatrix();
             return xVector;
@@ -122,7 +123,11 @@ namespace Zadanie2
 
         public T[] gaussWithFullChoice(T[] bVector)
         {
-            int[] xVectorNumberChangeTable = {1,2,3,4};
+            int[] xVectorNumberChangeTable = new int[bVector.Length];
+            for(int i = 0; i < bVector.Length; i++)
+            {
+                xVectorNumberChangeTable[i] = i + 1;
+            }
             bVector = makeRowEchelonMatrixWithFullChoice(bVector, xVectorNumberChangeTable);
             T[] xVector = countModifiedXVector(bVector,xVectorNumberChangeTable);
             setDefaultMatrix();
@@ -133,6 +138,7 @@ namespace Zadanie2
         {
             for (int k = 0; k < columns; k++)
             {
+                Console.WriteLine("Przekatna {0}",k+1);
                 for (int i = k; i < rows - 1; i++)
                 {
                     T numberForMultiply = (dynamic)matrix[i + 1, k] / matrix[k, k];
@@ -220,6 +226,7 @@ namespace Zadanie2
             int firstRowUnderDiagonal = columnNumber + 1;
             for (int i = firstRowUnderDiagonal; i < rows; i++)
             {
+                printMatrix();
                 if((dynamic)matrix[rowNumberWithMaxNumberInColumn,columnNumber] < matrix[i,columnNumber])
                 {
                     rowNumberWithMaxNumberInColumn = i;
@@ -286,6 +293,7 @@ namespace Zadanie2
             T[] xVector = new T[bVector.Length];
             for (int i = bVector.Length - 1; i >= 0; i--)
             {
+                Console.WriteLine("Wiersz {0}",i+1);
                 int j = i;
                 T numerator = bVector[i];
                 while (j < (columns - 1))
@@ -339,7 +347,7 @@ namespace Zadanie2
 
         public void setDefaultMatrix()
         {
-            matrix = (T[,])defaultMatrix.Clone();
+           matrix = (T[,])defaultMatrix.Clone();
         }
         
         public void WriteMatrixToFile(string name)
@@ -350,18 +358,18 @@ namespace Zadanie2
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
                         {
                             file.Write(String.Format("{0:N3}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
                     {
                         file.Write("\n");
                     }
                 }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\"+name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\" + name+".txt", true))
                 {
                     file.Write("*** *** *** *** *** ***\n");
                 } 
@@ -372,18 +380,18 @@ namespace Zadanie2
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
                         {
                             file.Write(String.Format("{0:N3}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
                     {
                         file.Write("\n");
                     }
                 }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
                 {
                     file.Write("*** *** *** *** *** ***\n");
                 }

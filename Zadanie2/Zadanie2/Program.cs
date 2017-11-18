@@ -12,34 +12,34 @@ namespace Zadanie2
             int i = 1;
             while (i <= 3)
             {
-                System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\DataRangeDouble"+i+".txt", "");
-                System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\DataRangeFloat"+i+".txt", "");
-                System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\DataRange\DataRangeFactorial"+i+".txt", "");
+                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeDouble" + i+".txt", "");
+                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeFloat" + i+".txt", "");
+                System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\DataRange\DataRangeFactorial" + i+".txt", "");
                 i++;
             }
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFactorial.txt", "");
             
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultFloat.txt", "");
             
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(AxX)DataResultDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(A+B+C)x(X)DataResultDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\(Ax(BxC))DataResultDouble.txt", "");
             
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFactorial.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFactorial.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFactorial.txt", "");
             
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFloat.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussFloat.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussFloat.txt", "");
             
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussDouble.txt", "");
-            System.IO.File.WriteAllText(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\NoChoiceGaussDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\RowChoiceGaussDouble.txt", "");
+            System.IO.File.WriteAllText(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\FullChoiceGaussDouble.txt", "");
             
         }
 
@@ -47,12 +47,12 @@ namespace Zadanie2
         {
             for (int i = 0; i < vector.Length; i++)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
                 {
                     file.WriteLine(String.Format("{0:N3}", vector[i]));
                 }
             }
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\pmatusza\Documents\MobaXterm\home\Studia\Algorytmy\Zad2\Zadanie2\Zadanie2\Data\Results\"+name+".txt", true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + name+".txt", true))
             {
                 file.Write("*** *** *** *** *** ***\n");
             }
@@ -68,35 +68,43 @@ namespace Zadanie2
                 Type t = temp.GetType();
                 if (t.ToString() == typeof(MyFraction) + "[]")
                 {
-                    MyMatrix<MyFraction> firstMatrix = new MyMatrix<MyFraction>(size,size);
-                    MyMatrix<MyFraction> secondMatrix = new MyMatrix<MyFraction>(size,size);
-                    MyMatrix<MyFraction> thirdMatrix = new MyMatrix<MyFraction>(size,size);
+                    MyMatrix<MyFraction> firstMatrix = new MyMatrix<MyFraction>(size, size);
+                    MyMatrix<MyFraction> secondMatrix = new MyMatrix<MyFraction>(size, size);
+                    MyMatrix<MyFraction> thirdMatrix = new MyMatrix<MyFraction>(size, size);
                     MyFraction[] firstVector = new MyFraction[size];
                     MyFraction[] firstResult = new MyFraction[size];
                     MyFraction[] secondResult = new MyFraction[size];
-                    MyMatrix<MyFraction> thirdResult = new MyMatrix<MyFraction>(size,size);
+                    MyMatrix<MyFraction> thirdResult = new MyMatrix<MyFraction>(size, size);
                     MyFraction[] fourthResult = new MyFraction[size];
                     MyFraction[] fifthResult = new MyFraction[size];
                     MyFraction[] sixthResult = new MyFraction[size];
+                    MyFraction[,] firstMatrixTable = new MyFraction[size, size];
+                    MyFraction[,] secondMatrixTable = new MyFraction[size, size];
+                    MyFraction[,] thirdMatrixTable = new MyFraction[size, size];
                     for (int j = 0; j < size; j++)
                     {
                         for (int k = 0; k < size; k++)
                         {
                             int a = rand.Next(1, 10);
                             int b = rand.Next(1, 10);
-                            firstMatrix.matrix[j,k] = new MyFraction(a,b);
+                            firstMatrixTable[j, k] = new MyFraction(a);
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            secondMatrix.matrix[j,k] = new MyFraction(a,b);
+                            secondMatrixTable[j, k] = new MyFraction(a);
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            thirdMatrix.matrix[j,k] = new MyFraction(a,b);
+                            thirdMatrixTable[j, k] = new MyFraction(a);
                             a = rand.Next(1, 10);
                             b = rand.Next(1, 10);
-                            firstVector[j] = new MyFraction(a,b);
+                            firstVector[j] = new MyFraction(a);
                         }
-                        
+
                     }
+                    firstMatrix.complementMatrix(firstMatrixTable);
+                    secondMatrix.complementMatrix(secondMatrixTable);
+                    thirdMatrix.complementMatrix(thirdMatrixTable);
+
+
                     firstMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
                     secondMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
                     thirdMatrix.WriteMatrixToFile("DataRangeFactorial"+i.ToString());
@@ -104,13 +112,15 @@ namespace Zadanie2
                     firstResult = firstMatrix * firstVector;
                     secondResult = (firstMatrix + secondMatrix + thirdMatrix) * firstVector;
                     thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
-//                    Console.WriteLine("Przed Gaussem");
-//                    fourthResult = firstMatrix.gaussWithoutChoice((MyFraction[])firstVector.Clone());
-//                    Console.WriteLine("Po 1");
-//                    fifthResult = firstMatrix.gaussWithRowChoice((MyFraction[])firstVector.Clone());
-//                    Console.WriteLine("Po 2");
-//                    sixthResult = firstMatrix.gaussWithFullChoice((MyFraction[])firstVector.Clone());
-//                    Console.WriteLine("Po 3");
+
+                    Console.WriteLine("Przed Gaussem");
+                    firstMatrix.printMatrix();
+                    fourthResult = firstMatrix.gaussWithoutChoice((MyFraction[])firstVector.Clone());
+                    Console.WriteLine("Po 1");
+                    fifthResult = firstMatrix.gaussWithRowChoice((MyFraction[])firstVector.Clone());
+                    Console.WriteLine("Po 2");
+                    sixthResult = firstMatrix.gaussWithFullChoice((MyFraction[])firstVector.Clone());
+                    Console.WriteLine("Po 3");
                     
                     WriteVectorToFile(firstResult, "(AxX)DataResultFactorial");
                     WriteVectorToFile(secondResult, "(A+B+C)x(X)DataResultFactorial");
@@ -237,6 +247,7 @@ namespace Zadanie2
             ComputeAll<float>(10);
             ComputeAll<double>(10);
             Console.WriteLine("Done");
+            Console.ReadKey();
         }
      
     }
