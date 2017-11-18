@@ -9,8 +9,6 @@ namespace ComputeResults
         private static int size = 10;
         public static void Main(string[] args)
         {
-
-            //computeGaussMultiply();
             ComputeOperationsResults();
             Console.ReadKey();
         }
@@ -22,10 +20,39 @@ namespace ComputeResults
             computeAxBxC("(Ax(BxC))DataResult");
             computeAxX("(AxX)DataResult");
 
-            //copmuteGauss();
-          //  double[] doubleMuliplyResultSharp = ReadMatrix<double>("doubleMultiplyResultSharp");
-            //float[] floatMultiplyResultSharp = ReadMatrix<float>("floatMultiplyResultSharp");
-           // MyFraction[] fractionMultiplyResultSharp = ReadMatrix<MyFraction>("fractionMultiplyResultSharp");
+            computeGauss();
+        }
+
+        private static void computeGauss()
+        {
+            computeGaussType("NoChoiceGauss");
+            computeGaussType("RowChoiceGauss"); 
+            computeGaussType("FullChoiceGauss");
+           
+            
+        }
+
+        private static void computeGaussType(string type)
+        {
+            Console.WriteLine();
+            Console.WriteLine(type);
+            double doubleAndFractionDiffrenceSum = 0;
+            double floatAndFractionDiffrenceSum = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                double[] doubleResult = ReadVector<double>(type + "Double", i + 1);
+                float[] floatResult = ReadVector<float>(type + "Float", i + 1);
+                double[] fractionResult = ReadVector<double>(type + "Fraction", i + 1);
+
+                double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
+                double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
+
+                doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
+                floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
+            }
+
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
         }
 
         private static void computeAxX(string fileName)
