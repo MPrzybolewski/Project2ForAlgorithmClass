@@ -370,7 +370,7 @@ namespace Zadanie2
         
         public void WriteMatrixToFile(string name)
         {
-            string source = "D:\\Projekty\\Algorytmy\\Data\\";
+            string source = "C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\";
 
             if (!name.Contains("Result"))
             {

@@ -30,31 +30,34 @@ namespace ComputeResults
 
         private static void computeApBpCxX(string fileName)
         {
-            double[] doubleResult1 = ReadMatrix<double>(fileName + "Double", 1);
-            double[] doubleResult2 = ReadMatrix<double>(fileName + "Double", 2);
-            double[] doubleResult3 = ReadMatrix<double>(fileName + "Double", 3);
-            float[] floatResult1 = ReadMatrix<float>(fileName + "Float", 1);
-            float[] floatResult2 = ReadMatrix<float>(fileName + "Float", 2);
-            float[] floatResult3 = ReadMatrix<float>(fileName + "Float", 3);
+            double doubleAndFractionDiffrenceSum = 0;
+            double floatAndFractionDiffrenceSum = 0;
 
-            double[] fractionResult1 = ReadMatrix<double>(fileName + "Factorial", 1);
-            double[] fractionResult2 = ReadMatrix<double>(fileName + "Factorial", 2);
-            double[] fractionResult3 = ReadMatrix<double>(fileName + "Factorial", 3);
+            for (int i = 0; i < 3; i++)
+            {
+                double[] doubleResult1 = ReadMatrix<double>(fileName + "Double", i+1);
+                float[] floatResult1 = ReadMatrix<float>(fileName + "Float", i+1);
+                double[] fractionResult1 = ReadMatrix<double>(fileName + "Fraction", i+1);
+
+                double doubleAndFractionDiffrence = vectorNorm(doubleResult1, fractionResult1);
+                double floatAndFractionDiffrence = vectorNorm(floatResult1, fractionResult1);
+
+                doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
+                floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
+            }
+
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
             
-            double doubleAndFactorialDiffrence = vectorNorm(doubleResult1, fractionResult1);
-            double floatAndFactorialDiffrence = vectorNorm(floatResult1, fractionResult1);
-
-            Console.WriteLine("Roznica double: {0}", doubleAndFactorialDiffrence);
-            Console.WriteLine("Roznica float: {0}", floatAndFactorialDiffrence);
         }
 
-        private static double vectorNorm(double[] doubleResult, double[] factorialResult)
+        private static double vectorNorm(double[] doubleResult, double[] fractionResult)
         {
             double[] temp = new double[size];
             double sum = 0;
             for(int i = 0; i < size; i++)
             {
-                temp[i] = doubleResult[i] - factorialResult[i];
+                temp[i] = doubleResult[i] - fractionResult[i];
                 temp[i] *= temp[i];
                 sum += temp[i];
             }
@@ -64,13 +67,13 @@ namespace ComputeResults
             return sum;
         }
 
-        private static double vectorNorm(float[] floatResult, double[] factorialResult)
+        private static double vectorNorm(float[] floatResult, double[] fractionResult)
         {
             double[] temp = new double[size];
             double sum = 0;
             for (int i = 0; i < size; i++)
             {
-                temp[i] = (Double)floatResult[i] - factorialResult[i];
+                temp[i] = (Double)floatResult[i] - fractionResult[i];
                 temp[i] *= temp[i];
                 sum += temp[i];
             }
