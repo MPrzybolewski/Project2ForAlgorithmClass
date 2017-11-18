@@ -7,7 +7,7 @@ namespace Zadanie2
 {
     class MainClass
     {
-        public static string source = "D:\\Projekty\\Algorytmy\\Data\\";
+        public static string source = "C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\";
 
         public static void CleanFiles()
         {
