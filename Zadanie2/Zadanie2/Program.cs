@@ -112,12 +112,14 @@ namespace Zadanie2
                     {
                         int a = rand.Next(1, 10);
                         int b = rand.Next(1, 10);
-                        firstFractionTable[j,k] = new MyFraction(a, b);                    
-                        firstFractionVector[j] = new MyFraction(a, b);
+                        firstFractionTable[j,k] = new MyFraction(a, b);
+                        int c = rand.Next(1, 10);
+                        int d = rand.Next(1, 10);
+                        firstFractionVector[j] = new MyFraction(c, d);
                         firstFloatTable[j, k] = (float)a / b;                  
-                        firstFloatVector[j] = (float)a / b;
+                        firstFloatVector[j] = (float)c / d;
                         firstDoubleTable[j, k] = (double)a / b;
-                        firstDoubleVector[j] = (double)a / b;
+                        firstDoubleVector[j] = (double)c / d;
                     }
 
                 }
