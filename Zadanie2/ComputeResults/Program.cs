@@ -36,6 +36,7 @@ namespace ComputeResults
             float[] floatResult1 = ReadMatrix<float>(fileName + "Float", 1);
             float[] floatResult2 = ReadMatrix<float>(fileName + "Float", 2);
             float[] floatResult3 = ReadMatrix<float>(fileName + "Float", 3);
+
             double[] fractionResult1 = ReadMatrix<double>(fileName + "Factorial", 1);
             double[] fractionResult2 = ReadMatrix<double>(fileName + "Factorial", 2);
             double[] fractionResult3 = ReadMatrix<double>(fileName + "Factorial", 3);
@@ -73,7 +74,6 @@ namespace ComputeResults
                 temp[i] *= temp[i];
                 sum += temp[i];
             }
-
             sum = Math.Sqrt(sum);
 
             return sum;
