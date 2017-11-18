@@ -114,7 +114,6 @@ namespace Zadanie2
                     thirdResult = firstMatrix * (secondMatrix * thirdMatrix);
 
                     Console.WriteLine("Przed Gaussem");
-                    firstMatrix.printMatrix();
                     fourthResult = firstMatrix.gaussWithoutChoice((MyFraction[])firstVector.Clone());
                     Console.WriteLine("Po 1");
                     fifthResult = firstMatrix.gaussWithRowChoice((MyFraction[])firstVector.Clone());

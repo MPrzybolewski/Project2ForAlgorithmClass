@@ -106,7 +106,6 @@ namespace Zadanie2
         public T[] gaussWithoutChoice(T[] bVector)
         {
             bVector = makeRowEchelonMatrix(bVector);
-            Console.WriteLine("Koniec liczenia b");
             T[] xVector = countXVector(bVector);
             setDefaultMatrix();
             return xVector;
@@ -138,7 +137,6 @@ namespace Zadanie2
         {
             for (int k = 0; k < columns; k++)
             {
-                Console.WriteLine("Przekatna {0}",k+1);
                 for (int i = k; i < rows - 1; i++)
                 {
                     T numberForMultiply = (dynamic)matrix[i + 1, k] / matrix[k, k];
@@ -226,7 +224,6 @@ namespace Zadanie2
             int firstRowUnderDiagonal = columnNumber + 1;
             for (int i = firstRowUnderDiagonal; i < rows; i++)
             {
-                printMatrix();
                 if((dynamic)matrix[rowNumberWithMaxNumberInColumn,columnNumber] < matrix[i,columnNumber])
                 {
                     rowNumberWithMaxNumberInColumn = i;
@@ -280,7 +277,6 @@ namespace Zadanie2
                 matrix[i, columnNumberWithDiagonalPoint] = matrix[i, columnNumberWithMaxNumber];
                 matrix[i, columnNumberWithMaxNumber] = tempColumn[i];
             }
-
             tempValue = xVector[columnNumberWithDiagonalPoint];
             xVector[columnNumberWithDiagonalPoint] = xVector[columnNumberWithMaxNumber];
             xVector[columnNumberWithMaxNumber] = tempValue;
@@ -293,7 +289,6 @@ namespace Zadanie2
             T[] xVector = new T[bVector.Length];
             for (int i = bVector.Length - 1; i >= 0; i--)
             {
-                Console.WriteLine("Wiersz {0}",i+1);
                 int j = i;
                 T numerator = bVector[i];
                 while (j < (columns - 1))
@@ -315,26 +310,49 @@ namespace Zadanie2
 
             int indexTemp;
             T valueTemp;
+            Console.WriteLine("Wektor x przed zmiana");
+            for (int i = 0; i < xVector.Length; i++)
+            {
+                Console.WriteLine("{0} - {1}", i + 1, xVectorNumberChangeTable[i]);
+            }
 
             for (int i = 0; i < xVector.Length; i++)
             {
-                if(xVectorNumberChangeTable[i] != i)
+                if(xVectorNumberChangeTable[i] != i + 1)
                 {
-                    int indexForReplacing = xVectorNumberChangeTable[i] - 1;
+                    int indexWithNumber = findIndexWithNumber(xVectorNumberChangeTable, i+1);
 
                     indexTemp = xVectorNumberChangeTable[i];
-                    xVectorNumberChangeTable[i] = xVectorNumberChangeTable[indexForReplacing];
-                    xVectorNumberChangeTable[indexForReplacing] = indexTemp;
+                    xVectorNumberChangeTable[i] = xVectorNumberChangeTable[indexWithNumber];
+                    xVectorNumberChangeTable[indexWithNumber] = indexTemp;
 
                     valueTemp = xVector[i];
-                    xVector[i] = xVector[indexForReplacing];
-                    xVector[indexForReplacing] = valueTemp;
+                    xVector[i] = xVector[indexWithNumber];
+                    xVector[indexWithNumber] = valueTemp;
                 }
             }
 
+            Console.WriteLine("Wektor x po zmianie");
+            for (int i = 0; i < xVector.Length; i++)
+            {
+                Console.WriteLine("{0} - {1}", i + 1, xVectorNumberChangeTable[i]);
+            }
 
             return xVector;
         }
+        
+        private int findIndexWithNumber(int[] xVector,int number)
+        { 
+            for(int i = 0; i < xVector.Length; i++)
+            {
+                if(xVector[i] == number)
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+        
 
         public void printVector(T[] vector)
         {
