@@ -380,7 +380,7 @@ namespace Zadanie2
                     {
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(String.Format("{0:N16}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
@@ -400,18 +400,18 @@ namespace Zadanie2
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N3}", matrix[i,j]));
+                            file.Write(String.Format("{0:N16}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                     {
                         file.Write("\n");
                     }
                 }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                 {
                     file.Write("*** *** *** *** *** ***\n");
                 }

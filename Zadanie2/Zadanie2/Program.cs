@@ -8,6 +8,7 @@ namespace Zadanie2
     class MainClass
     {
         public static string source = "D:\\Projekty\\Algorytmy\\Data\\";
+
         public static void CleanFiles()
         {
             int i = 1;
@@ -50,7 +51,7 @@ namespace Zadanie2
             {
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "Results\\" + name + ".txt", true))
                 {
-                    file.WriteLine(String.Format("{0:N3}", vector[i]));
+                    file.WriteLine(String.Format("{0:N16}", vector[i]));
                 }
             }
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "Results\\" + name + ".txt", true))
@@ -69,6 +70,9 @@ namespace Zadanie2
                 MyMatrix<MyFraction> firstFractionMatrix = new MyMatrix<MyFraction>(size, size);
                 MyMatrix<MyFraction> secondFractionMatrix = new MyMatrix<MyFraction>(size, size);
                 MyMatrix<MyFraction> thirdFractionMatrix = new MyMatrix<MyFraction>(size, size);
+                MyFraction[,] firstFractionTable = new MyFraction[size, size];
+                MyFraction[,] secondFractionTable = new MyFraction[size, size];
+                MyFraction[,] thirdFractionTable = new MyFraction[size, size];
                 MyFraction[] firstFractionVector = new MyFraction[size];
                 MyFraction[] firstFractionResult = new MyFraction[size];
                 MyFraction[] secondFractionResult = new MyFraction[size];
@@ -79,6 +83,9 @@ namespace Zadanie2
                 MyMatrix<float> firstFloatMatrix = new MyMatrix<float>(size, size);
                 MyMatrix<float> secondFloatMatrix = new MyMatrix<float>(size, size);
                 MyMatrix<float> thirdFloatMatrix = new MyMatrix<float>(size, size);
+                float[,] firstFloatTable = new float[size, size];
+                float[,] secondFloatTable = new float[size, size];
+                float[,] thirdFloatTable = new float[size, size];
                 float[] firstFloatVector = new float[size];
                 float[] firstFloatResult = new float[size];
                 float[] secondFloatResult = new float[size];
@@ -89,6 +96,9 @@ namespace Zadanie2
                 MyMatrix<double> firstDoubleMatrix = new MyMatrix<double>(size, size);
                 MyMatrix<double> secondDoubleMatrix = new MyMatrix<double>(size, size);
                 MyMatrix<double> thirdDoubleMatrix = new MyMatrix<double>(size, size);
+                double[,] firstDoubleTable = new double[size, size];
+                double[,] secondDoubleTable = new double[size, size];
+                double[,] thirdDoubleTable = new double[size, size];
                 double[] firstDoubleVector = new double[size];
                 double[] firstDoubleResult = new double[size];
                 double[] secondDoubleResult = new double[size];
@@ -102,21 +112,53 @@ namespace Zadanie2
                     {
                         int a = rand.Next(1, 10);
                         int b = rand.Next(1, 10);
-                        firstFractionMatrix.matrix[j, k] = new MyFraction(a, b);
-                        secondFractionMatrix.matrix[j, k] = new MyFraction(a, b);
-                        thirdFractionMatrix.matrix[j, k] = new MyFraction(a, b);
+                        firstFractionTable[j,k] = new MyFraction(a, b);                    
                         firstFractionVector[j] = new MyFraction(a, b);
-                        firstFloatMatrix.matrix[j, k] = (float)a / b;
-                        secondFloatMatrix.matrix[j, k] = (float)a / b;
-                        thirdFloatMatrix.matrix[j, k] = (float)a / b;
+                        firstFloatTable[j, k] = (float)a / b;                  
                         firstFloatVector[j] = (float)a / b;
-                        firstDoubleMatrix.matrix[j, k] = (double)a / b;
-                        secondDoubleMatrix.matrix[j, k] = (double)a / b;
-                        thirdDoubleMatrix.matrix[j, k] = (double)a / b;
+                        firstDoubleTable[j, k] = (double)a / b;
                         firstDoubleVector[j] = (double)a / b;
                     }
 
                 }
+
+                for (int j = 0; j < size; j++)
+                {
+                    for (int k = 0; k < size; k++)
+                    {
+                        int a = rand.Next(1, 10);
+                        int b = rand.Next(1, 10);
+                        secondFractionTable[j, k] = new MyFraction(a, b);
+                        secondFloatTable[j, k] = (float)a / b;
+                        secondDoubleTable[j, k] = (double)a / b;
+                    }
+
+                }
+
+                for (int j = 0; j < size; j++)
+                {
+                    for (int k = 0; k < size; k++)
+                    {
+                        int a = rand.Next(1, 10);
+                        int b = rand.Next(1, 10);
+                        thirdFractionTable[j, k] = new MyFraction(a, b);
+                        thirdFloatTable[j, k] = (float)a / b;
+                        thirdDoubleTable[j, k] = (double)a / b;
+                    }
+
+                }
+
+                firstFractionMatrix.complementMatrix(firstFractionTable);
+                secondFractionMatrix.complementMatrix(secondFractionTable);
+                thirdFractionMatrix.complementMatrix(thirdFractionTable);
+                firstFloatMatrix.complementMatrix(firstFloatTable);
+                secondFloatMatrix.complementMatrix(secondFloatTable);
+                thirdFloatMatrix.complementMatrix(thirdFloatTable);
+                firstDoubleMatrix.complementMatrix(firstDoubleTable);
+                secondDoubleMatrix.complementMatrix(secondDoubleTable);
+                thirdDoubleMatrix.complementMatrix(thirdDoubleTable);
+
+
                 Console.WriteLine("Po forze {0}", i);
                 firstFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
                 secondFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
@@ -125,20 +167,20 @@ namespace Zadanie2
                 firstFractionResult = firstFractionMatrix * firstFractionVector;
                 secondFractionResult = (firstFractionMatrix + secondFractionMatrix + thirdFractionMatrix) * firstFractionVector;
                 thirdFractionResult = firstFractionMatrix * (secondFractionMatrix * thirdFractionMatrix);
-                /*Console.WriteLine("Przed Gaussem");
+                Console.WriteLine("Przed Gaussem");
                 fourthFractionResult = firstFractionMatrix.gaussWithoutChoice((MyFraction[])firstFractionVector.Clone());
                 Console.WriteLine("Po 1");
                 fifthFractionResult = firstFractionMatrix.gaussWithRowChoice((MyFraction[])firstFractionVector.Clone());
                 Console.WriteLine("Po 2");
                 sixthFractionResult = firstFractionMatrix.gaussWithFullChoice((MyFraction[])firstFractionVector.Clone());
-                Console.WriteLine("Po 3");*/
+                Console.WriteLine("Po 3");
 
-                WriteVectorToFile(firstFractionResult, "(AxX)DataResultFactorial");
-                WriteVectorToFile(secondFractionResult, "(A+B+C)x(X)DataResultFactorial");
-                thirdFractionResult.WriteMatrixToFile("(Ax(BxC))DataResultFactorial");
-                WriteVectorToFile(fourthFractionResult, "NoChoiceGaussFactorial");
-                WriteVectorToFile(fifthFractionResult, "RowChoiceGaussFactorial");
-                WriteVectorToFile(sixthFractionResult, "FullChoiceGaussFactorial");
+                WriteVectorToFile(firstFractionResult, "(AxX)DataResultFraction");
+                WriteVectorToFile(secondFractionResult, "(A+B+C)x(X)DataResultFraction");
+                thirdFractionResult.WriteMatrixToFile("(Ax(BxC))DataResultFraction");
+                WriteVectorToFile(fourthFractionResult, "NoChoiceGaussFraction");
+                WriteVectorToFile(fifthFractionResult, "RowChoiceGaussFraction");
+                WriteVectorToFile(sixthFractionResult, "FullChoiceGaussFraction");
 
                 firstFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
                 secondFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
@@ -147,13 +189,13 @@ namespace Zadanie2
                 firstFloatResult = firstFloatMatrix * firstFloatVector;
                 secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
                 thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
-                /*Console.WriteLine("Przed Gaussem");
+                Console.WriteLine("Przed Gaussem");
                 fourthFloatResult = firstFloatMatrix.gaussWithoutChoice((float[])firstFloatVector.Clone());
                 Console.WriteLine("Po 1");
                 fifthFloatResult = firstFloatMatrix.gaussWithRowChoice((float[])firstFloatVector.Clone());
                 Console.WriteLine("Po 2");
                 sixthFloatResult = firstFloatMatrix.gaussWithFullChoice((float[])firstFloatVector.Clone());
-                Console.WriteLine("Po 3");*/
+                Console.WriteLine("Po 3");
 
                 WriteVectorToFile(firstFloatResult, "(AxX)DataResultFloat");
                 WriteVectorToFile(secondFloatResult, "(A+B+C)x(X)DataResultFloat");
@@ -169,13 +211,13 @@ namespace Zadanie2
                 firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
                 secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
                 thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
-                /*Console.WriteLine("Przed Gaussem");
+                Console.WriteLine("Przed Gaussem");
                 fourthDoubleResult = firstDoubleMatrix.gaussWithoutChoice((double[])firstDoubleVector.Clone());
                 Console.WriteLine("Po 1");
                 fifthDoubleResult = firstDoubleMatrix.gaussWithRowChoice((double[])firstDoubleVector.Clone());
                 Console.WriteLine("Po 2");
                 sixthDoubleResult = firstDoubleMatrix.gaussWithFullChoice((double[])firstDoubleVector.Clone());
-                Console.WriteLine("Po 3");*/
+                Console.WriteLine("Po 3");
 
                 WriteVectorToFile(firstDoubleResult, "(AxX)DataResultDouble");
                 WriteVectorToFile(secondDoubleResult, "(A+B+C)x(X)DataResultDouble");
