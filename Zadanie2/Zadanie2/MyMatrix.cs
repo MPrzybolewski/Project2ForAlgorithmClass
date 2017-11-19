@@ -370,7 +370,7 @@ namespace Zadanie2
         
         public void WriteMatrixToFile(string name)
         {
-            string source = "D:\\Projekty\\Algorytmy\\Data\\";
+            string source = "C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\";
 
             if (!name.Contains("Result"))
             {
@@ -380,7 +380,7 @@ namespace Zadanie2
                     {
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\DataRange\\" + name + ".txt", true))
                         {
-                            file.Write(String.Format("{0:N16}", matrix[i,j]).Replace(" ", ""));
+                            file.Write(String.Format("{0:00.0000000000000000}", matrix[i, j]));
                             file.Write(" ");
                         }
                     }
@@ -403,8 +403,8 @@ namespace Zadanie2
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "\\Results\\" + name + ".txt", true))
                         {
                             string s = matrix[i, j].ToString();
-                            s = s.Replace(" ", "");
-                            file.Write(String.Format("{0:N16}", s));
+                            s.Replace(" ", "");
+                            file.Write(String.Format("{0:00.0000000000000000}", matrix[i,j]));
                             file.Write(" ");
                         }
                     }

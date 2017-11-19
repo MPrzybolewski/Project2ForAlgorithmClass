@@ -7,7 +7,7 @@ namespace Zadanie2
 {
     class MainClass
     {
-        public static string source = "D:\\Projekty\\Algorytmy\\Data\\";
+        public static string source = "C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\";
 
         public static void CleanFiles()
         {
@@ -150,14 +150,14 @@ namespace Zadanie2
                     {
                         int a = rand.Next(1, 10);
                         int b = rand.Next(1, 10);
-                        firstFractionTable[j,k] = new MyFraction(a, b);                    
-                        firstFloatTable[j, k] = (float)a / b;                  
-                        firstDoubleTable[j, k] = (double)a / b;
+                        firstFractionTable[j,k] = new MyFraction(a, b);
                         int c = rand.Next(1, 10);
                         int d = rand.Next(1, 10);
                         firstFractionVector[j] = new MyFraction(c, d);
-                        firstDoubleVector[j] = (double)c / d;
+                        firstFloatTable[j, k] = (float)a / b;                  
                         firstFloatVector[j] = (float)c / d;
+                        firstDoubleTable[j, k] = (double)a / b;
+                        firstDoubleVector[j] = (double)c / d;
                     }
 
                 }
@@ -354,7 +354,7 @@ namespace Zadanie2
         public static void Main(string[] args)
         {
             CleanFiles();
-            ComputeAll(Int32.Parse(args[0]));
+            ComputeAll(20);
             Console.WriteLine("Done");
             Console.ReadKey();
         }
