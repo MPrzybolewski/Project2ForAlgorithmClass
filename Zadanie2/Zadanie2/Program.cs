@@ -178,6 +178,12 @@ namespace Zadanie2
                 secondDoubleMatrix.complementMatrix(secondDoubleTable);
                 thirdDoubleMatrix.complementMatrix(thirdDoubleTable);
 
+                if (i==3)
+                {
+                    Console.WriteLine("debug");
+                    thirdDoubleMatrix.printMatrix();
+                }
+
 
                 Console.WriteLine("Po forze {0}", i);
                 firstFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
@@ -236,11 +242,6 @@ namespace Zadanie2
                 thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
                 Console.WriteLine("Przed Gaussem");
                 fourthDoubleResult = firstDoubleMatrix.gaussWithoutChoice((double[])firstDoubleVector.Clone());
-                Console.WriteLine("Gauss: ");
-                for (int x = 0; x < fourthDoubleResult.Length; x++)
-                {
-                    Console.WriteLine(fourthDoubleResult[x]);
-                }
                 Console.WriteLine("Po 1");
                 fifthDoubleResult = firstDoubleMatrix.gaussWithRowChoice((double[])firstDoubleVector.Clone());
                 Console.WriteLine("Po 2");
