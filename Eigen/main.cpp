@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
 #include <iomanip>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
@@ -11,9 +13,22 @@ using Eigen::VectorXd;
 using Eigen::VectorXf;
 using namespace std;
 
-const int size = 4;
+namespace patch
+{
+    template < typename T > std::string to_string( const T& n )
+    {
+        std::ostringstream stm ;
+        stm << n ;
+        return stm.str() ;
+    }
+}
 
-void writeFloatFile(string name, MatrixXf floatMatrix);
+
+void CleanFiles();
+void writeDoubleMatrixToFile(MatrixXd a, int size,string name);
+void writeFloatMatrixToFile(MatrixXd a, int size,string name);
+void writeDoubleVectorFile(string name, VectorXd doubleVector, int size);
+void writeFloatVectorFile(string name, VectorXf floatMatrix, int size);
 
 int CountSize()
 {
@@ -27,180 +42,298 @@ int CountSize()
 	return result;
 }
 
-void ReadDataDoubleFromFile(MatrixXd a,MatrixXd b,MatrixXd c, VectorXd x)
+void ReadDataDoubleFromFile(int size)
 {
+	int x = 1;
 	using namespace boost::algorithm;
-	int k = 0;
-	int flag = 0;
-	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
-	for( std::string line; getline( input, line ); )
+	while (x <=3)
 	{
-		//cout << line << endl;
-		
-		int j = 0;
-		if (line.find("***") != string::npos)
-		{
-				flag++;
-				k--;
-		}
-		else
-		{
-			vector<string> tokens;	
-			split(tokens, line, is_any_of(" "));
-			for(auto& s: tokens)
+		MatrixXd firstDoubleMatrix(size,size);
+		MatrixXd secondDoubleMatrix(size,size);
+		MatrixXd thirdDoubleMatrix(size,size);
+		VectorXd firstDoubleVector(size);
+		VectorXd firstDoubleResult(size);
+		VectorXd secondDoubleResult(size);
+		MatrixXd thirdDoubleResult(size,size);
+		VectorXd fourthDoubleResult(size);
+		VectorXd fifthDoubleResult(size);
+		VectorXd sixthDoubleResult(size);
+		int k = 0;
+		int flag = 0;
+		string s = patch::to_string(x);
+		cout << "s= " << s << endl;
+		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble"+s+".txt");
+		for( std::string line; getline( input, line ); )
+		{	
+			int j = 0;
+			if (line.find("***") != string::npos)
 			{
-				replace( s.begin(), s.end(), ',', '.');
-				if (j==10)
-				{ 
-					break;
-				}
-				else
+					flag++;
+					k--;
+			}
+			else
+			{
+				vector<string> tokens;	
+				split(tokens, line, is_any_of(" "));
+				for(auto& s: tokens)
 				{
-					if (flag==0)
-					{
-						double lol = atof(s.c_str());
-						a(k,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
-					} 
-					else if (flag==1)
-					{
-						double lol = atof(s.c_str());
-						b(k-10,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
-					} 
-					else if (flag==2)
-					{
-						double lol = atof(s.c_str());
-						c(k-20,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
+					replace( s.begin(), s.end(), ',', '.');
+					if (j==10)
+					{ 
+						break;
 					}
 					else
 					{
-						double lol = atof(s.c_str());
-						x(k-30) = lol;
+						if (flag==0)
+						{
+							double lol = atof(s.c_str());
+							firstDoubleMatrix(k,j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						} 
+						else if (flag==1)
+						{
+							double lol = atof(s.c_str());
+							secondDoubleMatrix(k-size,j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						} 
+						else if (flag==2)
+						{
+							double lol = atof(s.c_str());
+							thirdDoubleMatrix(k-(size*2),j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						}
+						else
+						{
+							double lol = atof(s.c_str());
+							firstDoubleVector(k-(size*3)) = lol;
+						}
+						
 					}
-					
-				}
-				j++;
-			}			
+					j++;
+				}			
+			}		
+			k++;		
+		}
+		
+		firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
+		writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);
+		if(x==3)
+		{
+			firstDoubleResult(0,0) = 0;
+			writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);
 		}		
-		k++;		
+		secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
+		writeDoubleVectorFile("(A+B+C)x(X)DataResultDouble[C].txt", secondDoubleResult, size);
+		thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
+		writeDoubleMatrixToFile(thirdDoubleResult, size, "(Ax(BxC))DataResultDouble[C].txt");
+		fourthDoubleResult = firstDoubleMatrix.fullPivLu().solve(firstDoubleVector);
+		writeDoubleVectorFile("PartialGausseDouble[C].txt", fourthDoubleResult, size);
+		fifthDoubleResult = firstDoubleMatrix.partialPivLu().solve(firstDoubleVector);
+		writeDoubleVectorFile("FullGausseDouble[C].txt", fifthDoubleResult, size);
+		x++;
 	}
 	
-	cout << a << endl;
 }
 
-void ReadDataFloatFromFile(MatrixXd a,MatrixXd b,MatrixXd c, VectorXd x)
+void ReadDataFloatFromFile(int size)
 {
-	using namespace boost::algorithm;
-	int k = 0;
-	int flag = 0;
-	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
-	for( std::string line; getline( input, line ); )
+	int x = 1;
+	while (x <=3)
 	{
-		//cout << line << endl;
-		
-		int j = 0;
-		if (line.find("***") != string::npos)
+		using namespace boost::algorithm;
+		MatrixXf firstFloatMatrix(size,size);
+		MatrixXf secondFloatMatrix(size,size);
+		MatrixXf thirdFloatMatrix(size,size);
+		VectorXf firstFloatVector(size);
+		VectorXf firstFloatResult(size);
+		VectorXf secondFloatResult(size);
+		MatrixXf thirdFloatResult(size,size);
+		VectorXf fourthFloatResult(size);
+		VectorXf fifthFloatResult(size);
+		VectorXf sixthFloatResult(size);
+		int k = 0;
+		int flag = 0;
+		string s = patch::to_string(x);
+		cout << "s= " << s << endl;
+		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeFloat"+s+".txt");
+		for( std::string line; getline( input, line ); )
 		{
-				flag++;
-				k--;
-		}
-		else
-		{
-			vector<string> tokens;	
-			split(tokens, line, is_any_of(" "));
-			for(auto& s: tokens)
+			//cout << line << endl;
+			
+			int j = 0;
+			if (line.find("***") != string::npos)
 			{
-				replace( s.begin(), s.end(), ',', '.');
-				if (j==10)
-				{ 
-					break;
-				}
-				else
+					flag++;
+					k--;
+			}
+			else
+			{
+				vector<string> tokens;	
+				split(tokens, line, is_any_of(" "));
+				for(auto& s: tokens)
 				{
-					if (flag==0)
-					{
-						double lol = atof(s.c_str());
-						a(k,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
-					} 
-					else if (flag==1)
-					{
-						double lol = atof(s.c_str());
-						b(k-10,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
-					} 
-					else if (flag==2)
-					{
-						double lol = atof(s.c_str());
-						c(k-20,j) = lol;
-						//cout << '"' << s << '"' << '\n';
-						//break;
+					replace( s.begin(), s.end(), ',', '.');
+					if (j==10)
+					{ 
+						break;
 					}
 					else
 					{
-						double lol = atof(s.c_str());
-						x(k-30) = lol;
+						if (flag==0)
+						{
+							float lol = (float)atof(s.c_str());
+							firstFloatMatrix(k,j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						} 
+						else if (flag==1)
+						{
+							float lol = (float)atof(s.c_str());
+							secondFloatMatrix(k-size,j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						} 
+						else if (flag==2)
+						{
+							float lol = (float)atof(s.c_str());
+							thirdFloatMatrix(k-(size*2),j) = lol;
+							//cout << '"' << s << '"' << '\n';
+							//break;
+						}
+						else
+						{
+							float lol = (float)atof(s.c_str());
+							firstFloatVector(k-(size*3)) = lol;
+						}
+						
 					}
-					
-				}
-				j++;
-			}			
-		}		
-		k++;		
-	}
+					j++;
+				}			
+			}		
+			k++;		
+		}
+		
+		firstFloatResult = firstFloatMatrix * firstFloatVector;
+		writeFloatVectorFile("(AxX)DataResultFloat[C].txt", firstFloatResult, size);
+		secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
+		writeFloatVectorFile("(A+B+C)x(X)DataResultFloat[C].txt", secondFloatResult, size);
+		thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
+		//writeFloatMatrixToFile(thirdFloatResult, size, "(Ax(BxC))DataResultFloat[C].txt");
+		fourthFloatResult = firstFloatMatrix.fullPivLu().solve(firstFloatVector);
+		writeFloatVectorFile("PartialGausseFloat[C].txt", fourthFloatResult, size);
+		fifthFloatResult = firstFloatMatrix.partialPivLu().solve(firstFloatVector);
+		writeFloatVectorFile("FullGausseFloat[C].txt", fifthFloatResult, size);
+		x++;
+	}	
 }
 
 void ComputeAll()
 {
-	int numberOfLines = CountSize();
-	MatrixXd firstDoubleMatrix(numberOfLines,numberOfLines);
-	MatrixXd secondDoubleMatrix(numberOfLines,numberOfLines);
-	MatrixXd thirdDoubleMatrix(numberOfLines,numberOfLines);
-	VectorXd firstDoubleVector(numberOfLines);
-	VectorXd firstDoubleResult(numberOfLines);
-	VectorXd secondDoubleResult(numberOfLines);
-	MatrixXd thirdDoubleResult(numberOfLines,numberOfLines);
-	VectorXd fourthDoubleVector(numberOfLines);
-	VectorXd fifthDoubleResult(numberOfLines);
-	VectorXd sixthDoubleResult(numberOfLines);
-	MatrixXf firstFloatMatrix(numberOfLines,numberOfLines);
-	MatrixXf secondFloatMatrix(numberOfLines,numberOfLines);
-	MatrixXf thirdFloatMatrix(numberOfLines,numberOfLines);
-	VectorXf firstFloatVector(numberOfLines);
-	VectorXf firstFloatResult(numberOfLines);
-	VectorXf secondFloatResult(numberOfLines);
-	MatrixXf thirdFloatResult(numberOfLines,numberOfLines);
-	VectorXf fourthFloatVector(numberOfLines);
-	VectorXf fifthFloatResult(numberOfLines);
-	VectorXf sixthFloatResult(numberOfLines);
+	int numberOfLines = CountSize();	
+	ReadDataDoubleFromFile(numberOfLines);
+	//ReadDataFloatFromFile(numberOfLines);
 }
 
 int main(int argc, char** argv) {
 	using namespace boost::algorithm;
-	
-	ReadDataDoubleFromFile(firstDoubleMatrix,secondDoubleMatrix,thirdDoubleMatrix,firstDoubleVector);
-	//ReadDataFloatFromFile(firstFloatMatrix,secondFloatMatrix,thirdFloatMatrix,firstFloatVector);
-	//cout.precision(10);
-	cout << firstDoubleMatrix(0) << '\n';
+	CleanFiles();
+	ComputeAll();
 	return 0;
 }
 
-void writeFloatVectorFile(string name, VectorXf floatVector)
+void CleanFiles()
+{
+	ofstream file1;
+	ofstream file2;
+	ofstream file3;
+	ofstream file4;
+	ofstream file5;
+	ofstream file6;
+	ofstream file7;
+	ofstream file8;
+	ofstream file9;
+	ofstream file10;
+	file1.open ("(AxX)DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file2.open ("(A+B+C)x(X)DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file3.open ("(Ax(BxC))DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
+	file4.open ("(AxX)DataResultFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file5.open ("(A+B+C)x(X)DataResultFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file6.open ("(Ax(BxC))DataResultFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+	file7.open ("PartialGausseDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
+	file8.open ("FullGausseDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file9.open ("PartialGausseFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+    file10.open ("FullGausseFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+	file1.close();
+	file2.close();
+	file3.close();
+	file4.close();
+	file5.close();
+	file6.close();
+	file7.close();
+	file8.close();
+	file9.close();
+	file10.close();
+}
+
+void writeDoubleMatrixToFile(MatrixXd a, int size,string name)
+{
+	std::ofstream outfile;
+
+	outfile.open(name, std::ios_base::app);
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			outfile << a(i,j);
+			outfile << " ";
+		}
+		outfile << "\n";
+	}
+	outfile << "*** *** *** *** *** ***";
+	outfile.close();
+}
+
+void writeFloatMatrixToFile(string name, VectorXf floatVector, int size)
+{
+	ofstream file;
+	file.open (name, std::ios_base::app);
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			file << floatVector(i,j);
+			file << " ";
+		}
+		file << "\n";
+	}
+	file << "*** *** *** *** *** ***";
+}
+
+void writeDoubleVectorFile(string name, VectorXd doubleVector, int size)
 {
   ofstream myfile;
-  myfile.open (name+".txt");
+  myfile.open (name, std::ios_base::app);
+  for (int i = 0; i < size; i++)
+  {
+  	myfile << doubleVector(i);
+  	myfile << "\n";
+  }
+  myfile << "*** *** *** *** *** *** ***";	
+  myfile.close();	
+}
+
+void writeFloatVectorFile(string name, VectorXf floatVector, int size)
+{
+  ofstream myfile;
+  myfile.open (name, std::ios_base::app);
   for (int i = 0; i < size; i++)
   {
   	myfile << floatVector(i);
-  	myfile << " ";
+  	myfile << "\n";
   }
-  myfile << "\n";	
+  myfile << "*** *** *** *** *** *** ***";	
   myfile.close();	
 }
