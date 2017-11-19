@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <typeinfo>
 #include <sstream>
 #include <string>
 #include <iomanip>
@@ -61,7 +62,6 @@ void ReadDataDoubleFromFile(int size)
 		int k = 0;
 		int flag = 0;
 		string s = patch::to_string(x);
-		cout << "s= " << s << endl;
 		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble"+s+".txt");
 		for( std::string line; getline( input, line ); )
 		{	
@@ -78,7 +78,7 @@ void ReadDataDoubleFromFile(int size)
 				for(auto& s: tokens)
 				{
 					replace( s.begin(), s.end(), ',', '.');
-					if (j==10)
+					if (j==size)
 					{ 
 						break;
 					}
@@ -116,15 +116,10 @@ void ReadDataDoubleFromFile(int size)
 				}			
 			}		
 			k++;		
-		}
+		}	
 		
 		firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
-		writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);
-		if(x==3)
-		{
-			firstDoubleResult(0,0) = 0;
-			writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);
-		}		
+		writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);	
 		secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
 		writeDoubleVectorFile("(A+B+C)x(X)DataResultDouble[C].txt", secondDoubleResult, size);
 		thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
@@ -147,6 +142,7 @@ void ReadDataFloatFromFile(int size)
 		MatrixXf firstFloatMatrix(size,size);
 		MatrixXf secondFloatMatrix(size,size);
 		MatrixXf thirdFloatMatrix(size,size);
+		MatrixXf temp(size,size);
 		VectorXf firstFloatVector(size);
 		VectorXf firstFloatResult(size);
 		VectorXf secondFloatResult(size);
@@ -160,9 +156,7 @@ void ReadDataFloatFromFile(int size)
 		cout << "s= " << s << endl;
 		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeFloat"+s+".txt");
 		for( std::string line; getline( input, line ); )
-		{
-			//cout << line << endl;
-			
+		{	
 			int j = 0;
 			if (line.find("***") != string::npos)
 			{
@@ -175,8 +169,8 @@ void ReadDataFloatFromFile(int size)
 				split(tokens, line, is_any_of(" "));
 				for(auto& s: tokens)
 				{
-					replace( s.begin(), s.end(), ',', '.');
-					if (j==10)
+					replace(s.begin(), s.end(), ',', '.');
+					if (j==size)
 					{ 
 						break;
 					}
@@ -184,28 +178,28 @@ void ReadDataFloatFromFile(int size)
 					{
 						if (flag==0)
 						{
-							float lol = (float)atof(s.c_str());
+							float lol = atof(s.c_str());
 							firstFloatMatrix(k,j) = lol;
 							//cout << '"' << s << '"' << '\n';
 							//break;
 						} 
 						else if (flag==1)
 						{
-							float lol = (float)atof(s.c_str());
+							float lol = atof(s.c_str());
 							secondFloatMatrix(k-size,j) = lol;
 							//cout << '"' << s << '"' << '\n';
 							//break;
 						} 
 						else if (flag==2)
 						{
-							float lol = (float)atof(s.c_str());
+							float lol = atof(s.c_str());
 							thirdFloatMatrix(k-(size*2),j) = lol;
 							//cout << '"' << s << '"' << '\n';
 							//break;
 						}
 						else
 						{
-							float lol = (float)atof(s.c_str());
+							float lol = atof(s.c_str());
 							firstFloatVector(k-(size*3)) = lol;
 						}
 						
@@ -215,15 +209,32 @@ void ReadDataFloatFromFile(int size)
 			}		
 			k++;		
 		}
-		
+
 		firstFloatResult = firstFloatMatrix * firstFloatVector;
 		writeFloatVectorFile("(AxX)DataResultFloat[C].txt", firstFloatResult, size);
 		secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
-		writeFloatVectorFile("(A+B+C)x(X)DataResultFloat[C].txt", secondFloatResult, size);
+		writeFloatVectorFile("(A+B+C)x(X)DataResultFloat[C].txt", secondFloatResult, size);	
 		thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
-		//writeFloatMatrixToFile(thirdFloatResult, size, "(Ax(BxC))DataResultFloat[C].txt");
+		
+		std::ofstream outfile;
+
+		outfile.open("(Ax(BxC))DataResultFloat[C].txt", std::ios_base::app);
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				outfile << setprecision(16) << fixed << thirdFloatResult(i,j);
+				outfile << " ";
+			}
+			outfile << "\n";
+		}
+		outfile << "*** *** *** *** *** ***\n";
+		outfile.close();
+		
+		
+		
 		fourthFloatResult = firstFloatMatrix.fullPivLu().solve(firstFloatVector);
-		writeFloatVectorFile("PartialGausseFloat[C].txt", fourthFloatResult, size);
+	    writeFloatVectorFile("PartialGausseFloat[C].txt", fourthFloatResult, size);
 		fifthFloatResult = firstFloatMatrix.partialPivLu().solve(firstFloatVector);
 		writeFloatVectorFile("FullGausseFloat[C].txt", fifthFloatResult, size);
 		x++;
@@ -234,7 +245,7 @@ void ComputeAll()
 {
 	int numberOfLines = CountSize();	
 	ReadDataDoubleFromFile(numberOfLines);
-	//ReadDataFloatFromFile(numberOfLines);
+	ReadDataFloatFromFile(numberOfLines);
 }
 
 int main(int argc, char** argv) {
@@ -287,29 +298,31 @@ void writeDoubleMatrixToFile(MatrixXd a, int size,string name)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			outfile << a(i,j);
+			outfile << setprecision(16) << fixed << a(i,j);
 			outfile << " ";
 		}
 		outfile << "\n";
 	}
-	outfile << "*** *** *** *** *** ***";
+	outfile << "*** *** *** *** *** ***\n";
 	outfile.close();
 }
 
-void writeFloatMatrixToFile(string name, VectorXf floatVector, int size)
+void writeFloatMatrixToFile(MatrixXf a, int size, string name)
 {
-	ofstream file;
-	file.open (name, std::ios_base::app);
+	std::ofstream outfile;
+
+	outfile.open(name, std::ios_base::app);
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			file << floatVector(i,j);
-			file << " ";
+			outfile << setprecision(16) << fixed << a(i,j);
+			outfile << " ";
 		}
-		file << "\n";
+		outfile << "\n";
 	}
-	file << "*** *** *** *** *** ***";
+	outfile << "*** *** *** *** *** ***\n";
+	outfile.close();
 }
 
 void writeDoubleVectorFile(string name, VectorXd doubleVector, int size)
@@ -318,10 +331,10 @@ void writeDoubleVectorFile(string name, VectorXd doubleVector, int size)
   myfile.open (name, std::ios_base::app);
   for (int i = 0; i < size; i++)
   {
-  	myfile << doubleVector(i);
+  	myfile << setprecision(16) << fixed << doubleVector(i);
   	myfile << "\n";
   }
-  myfile << "*** *** *** *** *** *** ***";	
+  myfile << "*** *** *** *** *** *** ***\n";	
   myfile.close();	
 }
 
@@ -331,9 +344,9 @@ void writeFloatVectorFile(string name, VectorXf floatVector, int size)
   myfile.open (name, std::ios_base::app);
   for (int i = 0; i < size; i++)
   {
-  	myfile << floatVector(i);
+  	myfile << setprecision(16) << fixed << floatVector(i);
   	myfile << "\n";
   }
-  myfile << "*** *** *** *** *** *** ***";	
+  myfile << "*** *** *** *** *** *** ***\n";	
   myfile.close();	
 }
