@@ -7,7 +7,7 @@ namespace Zadanie2
 {
     class MainClass
     {
-        public static string source = "D:\\Projekty\\Algorytmy\\Data\\";
+        public static string source = "C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\";
 
         public static void CleanFiles()
         {
@@ -264,7 +264,7 @@ namespace Zadanie2
         public static void Main(string[] args)
         {
             CleanFiles();
-            ComputeAll(Int32.Parse(args[0]));
+            ComputeAll(20);
             Console.WriteLine("Done");
             Console.ReadKey();
         }

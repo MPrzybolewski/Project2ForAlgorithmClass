@@ -34,7 +34,7 @@ void writeFloatVectorFile(string name, VectorXf floatMatrix, int size);
 int CountSize()
 {
 	using namespace boost::algorithm;
-	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
+	ifstream input("C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\DataRange\\DataRangeDouble1.txt");
 	vector<string> tokens;	
 	string line;
 	getline(input, line);
@@ -62,7 +62,7 @@ void ReadDataDoubleFromFile(int size)
 		int k = 0;
 		int flag = 0;
 		string s = patch::to_string(x);
-		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble"+s+".txt");
+		ifstream input("C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\DataRange\\DataRangeDouble"+s+".txt");
 		for( std::string line; getline( input, line ); )
 		{	
 			int j = 0;
@@ -154,7 +154,7 @@ void ReadDataFloatFromFile(int size)
 		int flag = 0;
 		string s = patch::to_string(x);
 		cout << "s= " << s << endl;
-		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeFloat"+s+".txt");
+		ifstream input("C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\Zadanie2\\Zadanie2\\Data\\DataRange\\DataRangeFloat"+s+".txt");
 		for( std::string line; getline( input, line ); )
 		{	
 			int j = 0;
