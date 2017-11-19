@@ -51,33 +51,49 @@ namespace ComputeResults
                 double[] doubleResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Double", i + 1);
                 float[] floatResult = ReadVector<float>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Float", i + 1);
                 double[] fractionResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Fraction", i + 1);
-                double[] doubleResultFullCpp = ReadVector<double>("Eigen\\FullGausseDouble[C]", i + 1);
-                float[] floatResultFullCpp = ReadVector<float>("Eigen\\FullGausseFloat[C]", i + 1);
-                double[] doubleResultPartialCpp = ReadVector<double>("Eigen\\PartialGausseDouble[C]", i + 1);
-                float[] floatResultPartialCpp = ReadVector<float>("Eigen\\PartialGausseFloat[C]", i + 1);
+                if (type == "RowChoiceGauss")
+                {
+                    double[] doubleResultPartialCpp = ReadVector<double>("Eigen\\PartialGausseDouble[C]", i + 1);
+                    float[] floatResultPartialCpp = ReadVector<float>("Eigen\\PartialGausseFloat[C]", i + 1);
+                    double doubleAndFractionPartialDiffrenceCpp = vectorNorm(doubleResultPartialCpp, fractionResult);
+                    double floatAndFractionPartialDiffrenceCpp = vectorNorm(floatResultPartialCpp, fractionResult);
+                    doubleAndFractionPartialDiffrenceSumCpp += doubleAndFractionPartialDiffrenceCpp;
+                    floatAndFractionPartiaDiffrenceSumCpp += floatAndFractionPartialDiffrenceCpp;
+                } else if( type == "FullChoiceGauss")
+                {
+                    double[] doubleResultFullCpp = ReadVector<double>("Eigen\\FullGausseDouble[C]", i + 1);
+                    float[] floatResultFullCpp = ReadVector<float>("Eigen\\FullGausseFloat[C]", i + 1);
+                    double doubleAndFractionFullDiffrenceCpp = vectorNorm(doubleResultFullCpp, fractionResult);
+                    double floatAndFractionFullDiffrenceCpp = vectorNorm(floatResultFullCpp, fractionResult);
+                    doubleAndFractionFullDiffrenceSumCpp += doubleAndFractionFullDiffrenceCpp;
+                    floatAndFractionFullDiffrenceSumCpp += floatAndFractionFullDiffrenceCpp;
+                }
+               
 
                 double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
                 double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
-                double doubleAndFractionFullDiffrenceCpp = vectorNorm(doubleResultFullCpp, fractionResult);
-                double floatAndFractionFullDiffrenceCpp = vectorNorm(floatResultFullCpp, fractionResult);
-                double doubleAndFractionPartialDiffrenceCpp = vectorNorm(doubleResultPartialCpp, fractionResult);
-                double floatAndFractionPartialDiffrenceCpp = vectorNorm(floatResultPartialCpp, fractionResult);
-
                 doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
-                doubleAndFractionFullDiffrenceSumCpp += doubleAndFractionFullDiffrenceCpp;
-                floatAndFractionFullDiffrenceSumCpp += floatAndFractionFullDiffrenceCpp;
-                doubleAndFractionPartialDiffrenceSumCpp += doubleAndFractionPartialDiffrenceCpp;
-                floatAndFractionPartiaDiffrenceSumCpp += floatAndFractionPartialDiffrenceCpp;
+                
+               
 
             }
 
             Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
             Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
-            Console.WriteLine("Bład dla double Full: {0}", doubleAndFractionFullDiffrenceSumCpp);
-            Console.WriteLine("Bład dla float Full: {0}", floatAndFractionFullDiffrenceSumCpp);
-            Console.WriteLine("Bład dla double Partial: {0}", doubleAndFractionPartialDiffrenceSumCpp);
-            Console.WriteLine("Bład dla float Partial: {0}", floatAndFractionPartiaDiffrenceSumCpp);
+            if (type == "RowChoiceGauss")
+            {
+                Console.WriteLine("Bład dla double Partial: {0}", doubleAndFractionPartialDiffrenceSumCpp);
+                Console.WriteLine("Bład dla float Partial: {0}", floatAndFractionPartiaDiffrenceSumCpp);
+
+            } else if(type == "FullChoiceGauss")
+            {
+                Console.WriteLine("Bład dla double Full: {0}", doubleAndFractionFullDiffrenceSumCpp);
+                Console.WriteLine("Bład dla float Full: {0}", floatAndFractionFullDiffrenceSumCpp);
+            }
+
+
+
         }
 
         private static void computeAxX(string fileName)

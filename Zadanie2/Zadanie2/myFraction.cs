@@ -17,7 +17,9 @@ namespace Zadanie2
                 Simplify(this.numerator, this.denominator);
             } else
             {
+                Console.WriteLine("0 w mianowniku");
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
+                Console.ReadKey();
             }
                 
         }
