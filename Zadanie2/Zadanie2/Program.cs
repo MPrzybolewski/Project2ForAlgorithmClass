@@ -354,7 +354,7 @@ namespace Zadanie2
         public static void Main(string[] args)
         {
             CleanFiles();
-            ComputeAll(20);
+            ComputeAll(Int32.Parse(args[0]));
             Console.WriteLine("Done");
             Console.ReadKey();
         }

@@ -9,7 +9,10 @@ namespace ComputeResults
         private static int size = 10;
         public static void Main(string[] args)
         {
+            size = Int32.Parse(args[0]);
+            Console.WriteLine("Obliczenia dla macierzy kwadratowej {0}", size);
             ComputeOperationsResults();
+            Console.WriteLine("Koniec");
             Console.ReadKey();
         }
 
@@ -37,22 +40,60 @@ namespace ComputeResults
             Console.WriteLine();
             Console.WriteLine(type);
             double doubleAndFractionDiffrenceSum = 0;
+            double doubleAndFractionFullDiffrenceSumCpp = 0;
+            double doubleAndFractionPartialDiffrenceSumCpp = 0;
             double floatAndFractionDiffrenceSum = 0;
+            double floatAndFractionFullDiffrenceSumCpp = 0;
+            double floatAndFractionPartiaDiffrenceSumCpp = 0;
+
             for (int i = 0; i < 3; i++)
             {
-                double[] doubleResult = ReadVector<double>(type + "Double", i + 1);
-                float[] floatResult = ReadVector<float>(type + "Float", i + 1);
-                double[] fractionResult = ReadVector<double>(type + "Fraction", i + 1);
+                double[] doubleResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Double", i + 1);
+                float[] floatResult = ReadVector<float>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Float", i + 1);
+                double[] fractionResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + type + "Fraction", i + 1);
+                if (type == "RowChoiceGauss")
+                {
+                    double[] doubleResultPartialCpp = ReadVector<double>("Eigen\\PartialGausseDouble[C]", i + 1);
+                    float[] floatResultPartialCpp = ReadVector<float>("Eigen\\PartialGausseFloat[C]", i + 1);
+                    double doubleAndFractionPartialDiffrenceCpp = vectorNorm(doubleResultPartialCpp, fractionResult);
+                    double floatAndFractionPartialDiffrenceCpp = vectorNorm(floatResultPartialCpp, fractionResult);
+                    doubleAndFractionPartialDiffrenceSumCpp += doubleAndFractionPartialDiffrenceCpp;
+                    floatAndFractionPartiaDiffrenceSumCpp += floatAndFractionPartialDiffrenceCpp;
+                } else if( type == "FullChoiceGauss")
+                {
+                    double[] doubleResultFullCpp = ReadVector<double>("Eigen\\FullGausseDouble[C]", i + 1);
+                    float[] floatResultFullCpp = ReadVector<float>("Eigen\\FullGausseFloat[C]", i + 1);
+                    double doubleAndFractionFullDiffrenceCpp = vectorNorm(doubleResultFullCpp, fractionResult);
+                    double floatAndFractionFullDiffrenceCpp = vectorNorm(floatResultFullCpp, fractionResult);
+                    doubleAndFractionFullDiffrenceSumCpp += doubleAndFractionFullDiffrenceCpp;
+                    floatAndFractionFullDiffrenceSumCpp += floatAndFractionFullDiffrenceCpp;
+                }
+               
 
                 double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
                 double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
-
                 doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
+                
+               
+
             }
 
             Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
             Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
+            if (type == "RowChoiceGauss")
+            {
+                Console.WriteLine("Bład dla double Partial: {0}", doubleAndFractionPartialDiffrenceSumCpp);
+                Console.WriteLine("Bład dla float Partial: {0}", floatAndFractionPartiaDiffrenceSumCpp);
+
+            } else if(type == "FullChoiceGauss")
+            {
+                Console.WriteLine("Bład dla double Full: {0}", doubleAndFractionFullDiffrenceSumCpp);
+                Console.WriteLine("Bład dla float Full: {0}", floatAndFractionFullDiffrenceSumCpp);
+            }
+
+
+
         }
 
         private static void computeAxX(string fileName)
@@ -60,23 +101,36 @@ namespace ComputeResults
             Console.WriteLine();
             Console.WriteLine("A * X");
             double doubleAndFractionDiffrenceSum = 0;
+            double doubleAndFractionDiffrenceSumCpp = 0;
             double floatAndFractionDiffrenceSum = 0;
+            double floatAndFractionDiffrenceSumCpp = 0;
+
 
             for (int i = 0; i < 3; i++)
             {
-                double[] doubleResult1 = ReadVector<double>(fileName + "Double", i + 1);
-                float[] floatResult1 = ReadVector<float>(fileName + "Float", i + 1);
-                double[] fractionResult1 = ReadVector<double>(fileName + "Fraction", i + 1);
+                double[] doubleResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Double", i + 1);
+                float[] floatResult = ReadVector<float>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Float", i + 1);
+                double[] fractionResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Fraction", i + 1);
+                double[] doubleResultCpp = ReadVector<double>("Eigen\\" + fileName + "Double[C]", i + 1);
+                float[] floatResultCpp = ReadVector<float>("Eigen\\" + fileName + "Float[C]", i + 1);
 
-                double doubleAndFractionDiffrence = vectorNorm(doubleResult1, fractionResult1);
-                double floatAndFractionDiffrence = vectorNorm(floatResult1, fractionResult1);
+                double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
+                double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
+                double doubleAndFracitonDriffrenceCpp = vectorNorm(doubleResultCpp, fractionResult);
+                double floatAndFractionDiffrenceCpp = vectorNorm(floatResultCpp, fractionResult);
 
                 doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
+                doubleAndFractionDiffrenceSumCpp += doubleAndFracitonDriffrenceCpp;
+                floatAndFractionDiffrenceSumCpp += floatAndFractionDiffrenceCpp;
+
+
             }
 
             Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
             Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla double c++: {0}", doubleAndFractionDiffrenceSumCpp/3);
+            Console.WriteLine("Błąd dla float c++: {0}", floatAndFractionDiffrenceSumCpp/3);
         }
 
         private static void computeAxBxC(string fileName)
@@ -84,16 +138,22 @@ namespace ComputeResults
             Console.WriteLine();
             Console.WriteLine("A * (B * C)");
             double doubleAndFractionDiffrenceSum = 0;
+            double doubleAndFractionDiffrenceSumCpp = 0;
             double floatAndFractionDiffrenceSum = 0;
+            double floatAndFractionDiffrenceSumCpp = 0;
 
             for (int i = 0; i < 3; i++)
             {
-                double[] doubleResult1 = ReadMatrix<double>(fileName + "Double", i + 1);
-                float[] floatResult1 = ReadMatrix<float>(fileName + "Float", i + 1);
-                double[] fractionResult1 = ReadMatrix<double>(fileName + "Fraction", i + 1);
+                double[] doubleResult = ReadMatrix<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Double", i + 1);
+                float[] floatResult = ReadMatrix<float>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Float", i + 1);
+                double[] fractionResult = ReadMatrix<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Fraction", i + 1);
+                double[] doubleResultCpp = ReadMatrix<double>("Eigen\\" + fileName + "Double[C]", i + 1);
+                float[] floatResultCpp = ReadMatrix<float>("Eigen\\" + fileName + "Float[C]", i + 1);
 
-                double doubleAndFractionDiffrence = vectorNorm(doubleResult1, fractionResult1);
-                double floatAndFractionDiffrence = vectorNorm(floatResult1, fractionResult1);
+                double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
+                double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
+                double doubleAndFracitonDriffrenceCpp = vectorNorm(doubleResultCpp, fractionResult);
+                double floatAndFractionDiffrenceCpp = vectorNorm(floatResultCpp, fractionResult);
 
                 doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
@@ -101,6 +161,8 @@ namespace ComputeResults
 
             Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
             Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla double c++: {0}", doubleAndFractionDiffrenceSumCpp / 3);
+            Console.WriteLine("Błąd dla float c++: {0}", floatAndFractionDiffrenceSumCpp / 3);
         }
 
 
@@ -109,25 +171,34 @@ namespace ComputeResults
             Console.WriteLine();
             Console.WriteLine("(A+B+C)*X");
             double doubleAndFractionDiffrenceSum = 0;
+            double doubleAndFractionDiffrenceSumCpp = 0;
             double floatAndFractionDiffrenceSum = 0;
+            double floatAndFractionDiffrenceSumCpp = 0;
 
             for (int i = 0; i < 3; i++)
             {
-                double[] doubleResult1 = ReadVector<double>(fileName + "Double", i+1);
-                
-                float[] floatResult1 = ReadVector<float>(fileName + "Float", i+1);
-                double[] fractionResult1 = ReadVector<double>(fileName + "Fraction", i+1);
+                double[] doubleResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Double", i+1);
+                float[] floatResult = ReadVector<float>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Float", i+1);
+                double[] fractionResult = ReadVector<double>("Zadanie2\\Zadanie2\\Data\\Results\\" + fileName + "Fraction", i+1);
+                double[] doubleResultCpp = ReadVector<double>("Eigen\\" + fileName + "Double[C]", i + 1);
+                float[] floatResultCpp = ReadVector<float>("Eigen\\" + fileName + "Float[C]", i + 1);
 
-                double doubleAndFractionDiffrence = vectorNorm(doubleResult1, fractionResult1);
-                double floatAndFractionDiffrence = vectorNorm(floatResult1, fractionResult1);
+                double doubleAndFractionDiffrence = vectorNorm(doubleResult, fractionResult);
+                double floatAndFractionDiffrence = vectorNorm(floatResult, fractionResult);
+                double doubleAndFracitonDriffrenceCpp = vectorNorm(doubleResultCpp, fractionResult);
+                double floatAndFractionDiffrenceCpp = vectorNorm(floatResultCpp, fractionResult);
 
                 doubleAndFractionDiffrenceSum += doubleAndFractionDiffrence;
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
+                doubleAndFractionDiffrenceSumCpp += doubleAndFracitonDriffrenceCpp;
+                floatAndFractionDiffrenceSumCpp += floatAndFractionDiffrenceCpp;
             }
 
             Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
             Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
-            
+            Console.WriteLine("Błąd dla double c++: {0}", doubleAndFractionDiffrenceSumCpp / 3);
+            Console.WriteLine("Błąd dla float c++: {0}", floatAndFractionDiffrenceSumCpp / 3);
+
         }
 
         private static double vectorNorm(double[] doubleResult, double[] fractionResult)
@@ -164,7 +235,7 @@ namespace ComputeResults
         {
             T[] tempTable = new T[size];
             Type t = tempTable.GetType();
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + fileName + ".txt");
+            string[] lines = System.IO.File.ReadAllLines("C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\" + fileName + ".txt");
             int i = 0;
             int j = 0;
 
@@ -177,7 +248,7 @@ namespace ComputeResults
                         break;
                     }
                     TypeConverter tc = TypeDescriptor.GetConverter(typeof(T));
-                    tempTable[i] = (T)tc.ConvertFrom(line);
+                    tempTable[i] = (T)tc.ConvertFrom(line.Replace(".",","));
                     i++;
                 }
 
@@ -196,7 +267,7 @@ namespace ComputeResults
             int sizeOfVector = size * size;
             T[] tempTable = new T[sizeOfVector];
             Type t = tempTable.GetType();
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Marek\Documents\Project2ForAlgorithmClass\Zadanie2\Zadanie2\Data\Results\" + fileName + ".txt");
+            string[] lines = System.IO.File.ReadAllLines("C:\\Users\\Marek\\Documents\\Project2ForAlgorithmClass\\" + fileName + ".txt");
             int i = 0;
             int j = 0;
             int rowInVector = 0;
@@ -213,7 +284,7 @@ namespace ComputeResults
                     string[] item = line.Split(' ');
                     for(int k = 0; k < item.Length-1; k++)
                     {
-                        string test = item[k];
+                        string test = item[k].Replace(".", ",");
                         tempTable[rowInVector] = (T)tc.ConvertFrom(test);
                         rowInVector++;
                     }
