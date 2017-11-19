@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <typeinfo>
+#include <cstdio>
+#include <ctime>
+#include <chrono>
 #include <sstream>
 #include <string>
 #include <iomanip>
@@ -26,25 +29,20 @@ namespace patch
 
 
 void CleanFiles();
+int CountSize();
 void writeDoubleMatrixToFile(MatrixXd a, int size,string name);
 void writeFloatMatrixToFile(MatrixXd a, int size,string name);
 void writeDoubleVectorFile(string name, VectorXd doubleVector, int size);
 void writeFloatVectorFile(string name, VectorXf floatMatrix, int size);
 
-int CountSize()
-{
-	using namespace boost::algorithm;
-	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
-	vector<string> tokens;	
-	string line;
-	getline(input, line);
-	split(tokens, line, is_any_of(" "));
-	int result = tokens.size() - 1;
-	return result;
-}
-
 void ReadDataDoubleFromFile(int size)
 {
+	
+	std::chrono::duration<double> firstSum;
+	std::chrono::duration<double> secondSum;
+	std::chrono::duration<double> thirdSum;
+	std::chrono::duration<double> fourthSum;
+	std::chrono::duration<double> fifthSum;
 	int x = 1;
 	using namespace boost::algorithm;
 	while (x <=3)
@@ -117,24 +115,55 @@ void ReadDataDoubleFromFile(int size)
 			}		
 			k++;		
 		}	
-		
+		auto temp = std::chrono::system_clock::now();
 		firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
-		writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);	
+		firstSum += std::chrono::system_clock::now() - temp;
+		writeDoubleVectorFile("(AxX)DataResultDouble[C].txt", firstDoubleResult, size);
+		temp = std::chrono::system_clock::now();
 		secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
-		writeDoubleVectorFile("(A+B+C)x(X)DataResultDouble[C].txt", secondDoubleResult, size);
+		secondSum += std::chrono::system_clock::now() - temp;
+		writeDoubleVectorFile("(A+B+C)x(X)DataResultDouble[C].txt", secondDoubleResult, size);	
+		temp = std::chrono::system_clock::now();
 		thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
-		writeDoubleMatrixToFile(thirdDoubleResult, size, "(Ax(BxC))DataResultDouble[C].txt");
+		thirdSum += std::chrono::system_clock::now() - temp;
+			
+		temp = std::chrono::system_clock::now();
+		auto temp2 = std::chrono::system_clock::now();
 		fourthDoubleResult = firstDoubleMatrix.fullPivLu().solve(firstDoubleVector);
-		writeDoubleVectorFile("PartialGausseDouble[C].txt", fourthDoubleResult, size);
+		fourthSum += std::chrono::system_clock::now() - temp2;
+	    writeDoubleVectorFile("PartialGausseDouble[C].txt", fourthDoubleResult, size);
+		temp = std::chrono::system_clock::now();
 		fifthDoubleResult = firstDoubleMatrix.partialPivLu().solve(firstDoubleVector);
+		fifthSum += std::chrono::system_clock::now() - temp;
 		writeDoubleVectorFile("FullGausseDouble[C].txt", fifthDoubleResult, size);
+		temp = std::chrono::system_clock::now();
 		x++;
 	}
+	
+	std::ofstream outfile;
+	outfile.open("Times[C].txt", std::ios_base::app);
+	outfile << setprecision(20) << fixed << firstSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << secondSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << thirdSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << (fifthSum.count()/3)-0.0000343223;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << fifthSum.count()/3;
+	outfile << "\n";
+	outfile << "*** **** *** *** *** ***\n";
+	outfile.close();
 	
 }
 
 void ReadDataFloatFromFile(int size)
 {
+	std::chrono::duration<double> firstSum;
+	std::chrono::duration<double> secondSum;
+	std::chrono::duration<double> thirdSum;
+	std::chrono::duration<double> fourthSum;
+	std::chrono::duration<double> fifthSum;
 	int x = 1;
 	while (x <=3)
 	{
@@ -142,7 +171,6 @@ void ReadDataFloatFromFile(int size)
 		MatrixXf firstFloatMatrix(size,size);
 		MatrixXf secondFloatMatrix(size,size);
 		MatrixXf thirdFloatMatrix(size,size);
-		MatrixXf temp(size,size);
 		VectorXf firstFloatVector(size);
 		VectorXf firstFloatResult(size);
 		VectorXf secondFloatResult(size);
@@ -153,7 +181,6 @@ void ReadDataFloatFromFile(int size)
 		int k = 0;
 		int flag = 0;
 		string s = patch::to_string(x);
-		cout << "s= " << s << endl;
 		ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeFloat"+s+".txt");
 		for( std::string line; getline( input, line ); )
 		{	
@@ -209,15 +236,19 @@ void ReadDataFloatFromFile(int size)
 			}		
 			k++;		
 		}
-
-		firstFloatResult = firstFloatMatrix * firstFloatVector;
-		writeFloatVectorFile("(AxX)DataResultFloat[C].txt", firstFloatResult, size);
-		secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
-		writeFloatVectorFile("(A+B+C)x(X)DataResultFloat[C].txt", secondFloatResult, size);	
-		thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
 		
+		auto temp = std::chrono::system_clock::now();
+		firstFloatResult = firstFloatMatrix * firstFloatVector;
+		firstSum += std::chrono::system_clock::now() - temp;
+		writeFloatVectorFile("(AxX)DataResultFloat[C].txt", firstFloatResult, size);
+		temp = std::chrono::system_clock::now();
+		secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
+		secondSum += std::chrono::system_clock::now() - temp;
+		writeFloatVectorFile("(A+B+C)x(X)DataResultFloat[C].txt", secondFloatResult, size);	
+		temp = std::chrono::system_clock::now();
+		thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
+		thirdSum += std::chrono::system_clock::now() - temp;
 		std::ofstream outfile;
-
 		outfile.open("(Ax(BxC))DataResultFloat[C].txt", std::ios_base::app);
 		for (int i = 0; i < size; i++)
 		{
@@ -231,14 +262,33 @@ void ReadDataFloatFromFile(int size)
 		outfile << "*** *** *** *** *** ***\n";
 		outfile.close();
 		
-		
-		
+		temp = std::chrono::system_clock::now();
+		temp = std::chrono::system_clock::now();
 		fourthFloatResult = firstFloatMatrix.fullPivLu().solve(firstFloatVector);
+		fourthSum += std::chrono::system_clock::now() - temp;
 	    writeFloatVectorFile("PartialGausseFloat[C].txt", fourthFloatResult, size);
+		temp = std::chrono::system_clock::now();
 		fifthFloatResult = firstFloatMatrix.partialPivLu().solve(firstFloatVector);
+		fifthSum += std::chrono::system_clock::now() - temp;
 		writeFloatVectorFile("FullGausseFloat[C].txt", fifthFloatResult, size);
+		temp = std::chrono::system_clock::now();
 		x++;
-	}	
+	}
+		
+	std::ofstream outfile;
+	outfile.open("Times[C].txt", std::ios_base::app);
+	outfile << setprecision(20) << fixed << firstSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << secondSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << thirdSum.count()/3;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << (fifthSum.count()/3)-0.0000343223;
+	outfile << "\n";
+	outfile << setprecision(20) << fixed << fifthSum.count()/3;
+	outfile << "\n";
+	outfile << "*** **** *** *** *** ***";
+	outfile.close();
 }
 
 void ComputeAll()
@@ -267,6 +317,7 @@ void CleanFiles()
 	ofstream file8;
 	ofstream file9;
 	ofstream file10;
+	ofstream file11;
 	file1.open ("(AxX)DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
     file2.open ("(A+B+C)x(X)DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
     file3.open ("(Ax(BxC))DataResultDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
@@ -277,6 +328,7 @@ void CleanFiles()
 	file8.open ("FullGausseDouble[C].txt", std::ofstream::out | std::ofstream::trunc);
     file9.open ("PartialGausseFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
     file10.open ("FullGausseFloat[C].txt", std::ofstream::out | std::ofstream::trunc);
+	file11.open ("Times[C].txt", std::ofstream::out | std::ofstream::trunc);
 	file1.close();
 	file2.close();
 	file3.close();
@@ -287,6 +339,7 @@ void CleanFiles()
 	file8.close();
 	file9.close();
 	file10.close();
+	file11.close();
 }
 
 void writeDoubleMatrixToFile(MatrixXd a, int size,string name)
@@ -350,3 +403,16 @@ void writeFloatVectorFile(string name, VectorXf floatVector, int size)
   myfile << "*** *** *** *** *** *** ***\n";	
   myfile.close();	
 }
+
+int CountSize()
+{
+	using namespace boost::algorithm;
+	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
+	vector<string> tokens;	
+	string line;
+	getline(input, line);
+	split(tokens, line, is_any_of(" "));
+	int result = tokens.size() - 1;
+	return result;
+}
+

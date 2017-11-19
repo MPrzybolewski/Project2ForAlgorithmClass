@@ -43,6 +43,8 @@ namespace Zadanie2
             System.IO.File.WriteAllText(source + "Results\\RowChoiceGaussDouble.txt", "");
             System.IO.File.WriteAllText(source + "Results\\FullChoiceGaussDouble.txt", "");
 
+            System.IO.File.WriteAllText(source + "Results\\Times.txt", "");
+
         }
 
         public static void WriteVectorToFile<T>(T[] vector, string name)
@@ -80,6 +82,24 @@ namespace Zadanie2
 
         public static void ComputeAll(int size)
         {
+            TimeSpan firstSumF = default(TimeSpan); 
+            TimeSpan secondSumF = default(TimeSpan); 
+            TimeSpan thirdSumF = default(TimeSpan); 
+            TimeSpan fourthSumF = default(TimeSpan); 
+            TimeSpan fifthSumF = default(TimeSpan); 
+            TimeSpan sixthSumF = default(TimeSpan); 
+            TimeSpan firstSumD = default(TimeSpan); 
+            TimeSpan secondSumD = default(TimeSpan); 
+            TimeSpan thirdSumD = default(TimeSpan); 
+            TimeSpan fourthSumD = default(TimeSpan); 
+            TimeSpan fifthSumD = default(TimeSpan); 
+            TimeSpan sixthSumD = default(TimeSpan); 
+            TimeSpan firstSumFr = default(TimeSpan); 
+            TimeSpan secondSumFr = default(TimeSpan); 
+            TimeSpan thirdSumFr = default(TimeSpan); 
+            TimeSpan fourthSumFr = default(TimeSpan); 
+            TimeSpan fifthSumFr = default(TimeSpan); 
+            TimeSpan sixthSumFr = default(TimeSpan); 
             int i = 1;
             while (i <= 3)
             {
@@ -191,16 +211,30 @@ namespace Zadanie2
                 thirdFractionMatrix.WriteMatrixToFile("DataRangeFraction" + i.ToString());
                 WriteVectorToFile(firstFractionVector, "DataRangeFraction" + i.ToString());
 
+                DateTime startTime = DateTime.Now;
                 firstFractionResult = firstFractionMatrix * firstFractionVector;
+                DateTime endTime = DateTime.Now;
+                firstSumFr += startTime - endTime;
+                startTime = DateTime.Now;
                 secondFractionResult = (firstFractionMatrix + secondFractionMatrix + thirdFractionMatrix) * firstFractionVector;
+                endTime = DateTime.Now;
+                secondSumFr += startTime - endTime;
+                startTime = DateTime.Now;
                 thirdFractionResult = firstFractionMatrix * (secondFractionMatrix * thirdFractionMatrix);
-                Console.WriteLine("Przed Gaussem");
+                endTime = DateTime.Now;
+                thirdSumFr += startTime - endTime;
+                startTime = DateTime.Now;
                 fourthFractionResult = firstFractionMatrix.gaussWithoutChoice((MyFraction[])firstFractionVector.Clone());
-                Console.WriteLine("Po 1");
+                endTime = DateTime.Now;
+                fourthSumFr += startTime - endTime;
+                startTime = DateTime.Now;
                 fifthFractionResult = firstFractionMatrix.gaussWithRowChoice((MyFraction[])firstFractionVector.Clone());
-                Console.WriteLine("Po 2");
+                endTime = DateTime.Now;
+                fifthSumFr += startTime - endTime;
+                startTime = DateTime.Now;
                 sixthFractionResult = firstFractionMatrix.gaussWithFullChoice((MyFraction[])firstFractionVector.Clone());
-                Console.WriteLine("Po 3");
+                endTime = DateTime.Now;
+                sixthSumFr += startTime - endTime;
 
                 WriteVectorToFile(firstFractionResult, "(AxX)DataResultFraction");
                 WriteVectorToFile(secondFractionResult, "(A+B+C)x(X)DataResultFraction");
@@ -214,16 +248,31 @@ namespace Zadanie2
                 thirdFractionMatrix.WriteMatrixToFile("DataRangeFloat" + i.ToString());
                 WriteVectorToFile(firstFloatVector, "DataRangeFloat" + i.ToString());
 
+                startTime = DateTime.Now;
                 firstFloatResult = firstFloatMatrix * firstFloatVector;
+                endTime = DateTime.Now;
+                firstSumF += startTime - endTime;
+                startTime = DateTime.Now;
                 secondFloatResult = (firstFloatMatrix + secondFloatMatrix + thirdFloatMatrix) * firstFloatVector;
+                endTime = DateTime.Now;
+                secondSumF += startTime - endTime;
+                startTime = DateTime.Now;
                 thirdFloatResult = firstFloatMatrix * (secondFloatMatrix * thirdFloatMatrix);
-                Console.WriteLine("Przed Gaussem");
+                endTime = DateTime.Now;
+                thirdSumF += startTime - endTime;
+                startTime = DateTime.Now;
                 fourthFloatResult = firstFloatMatrix.gaussWithoutChoice((float[])firstFloatVector.Clone());
-                Console.WriteLine("Po 1");
+                endTime = DateTime.Now;
+                fourthSumF += startTime - endTime;
+                startTime = DateTime.Now;
                 fifthFloatResult = firstFloatMatrix.gaussWithRowChoice((float[])firstFloatVector.Clone());
-                Console.WriteLine("Po 2");
+                endTime = DateTime.Now;
+                fifthSumF += startTime - endTime;
+                startTime = DateTime.Now;
                 sixthFloatResult = firstFloatMatrix.gaussWithFullChoice((float[])firstFloatVector.Clone());
-                Console.WriteLine("Po 3");
+                endTime = DateTime.Now;
+                sixthSumF += startTime - endTime;
+                startTime = DateTime.Now;
 
                 WriteVectorToFile(firstFloatResult, "(AxX)DataResultFloat");
                 WriteVectorToFile(secondFloatResult, "(A+B+C)x(X)DataResultFloat");
@@ -237,16 +286,31 @@ namespace Zadanie2
                 thirdDoubleMatrix.WriteMatrixToFile("DataRangeDouble" + i.ToString());
                 WriteVectorToFile(firstDoubleVector, "DataRangeDouble" + i.ToString());
 
+                startTime = DateTime.Now;
                 firstDoubleResult = firstDoubleMatrix * firstDoubleVector;
+                endTime = DateTime.Now;
+                firstSumD += startTime - endTime;
+                startTime = DateTime.Now;
                 secondDoubleResult = (firstDoubleMatrix + secondDoubleMatrix + thirdDoubleMatrix) * firstDoubleVector;
+                endTime = DateTime.Now;
+                secondSumD += startTime - endTime;
+                startTime = DateTime.Now;
                 thirdDoubleResult = firstDoubleMatrix * (secondDoubleMatrix * thirdDoubleMatrix);
-                Console.WriteLine("Przed Gaussem");
+                endTime = DateTime.Now;
+                thirdSumD += startTime - endTime;
+                startTime = DateTime.Now;
                 fourthDoubleResult = firstDoubleMatrix.gaussWithoutChoice((double[])firstDoubleVector.Clone());
-                Console.WriteLine("Po 1");
+                endTime = DateTime.Now;
+                fourthSumD += startTime - endTime;
+                startTime = DateTime.Now;
                 fifthDoubleResult = firstDoubleMatrix.gaussWithRowChoice((double[])firstDoubleVector.Clone());
-                Console.WriteLine("Po 2");
+                endTime = DateTime.Now;
+                fifthSumD += startTime - endTime;
+                startTime = DateTime.Now;
                 sixthDoubleResult = firstDoubleMatrix.gaussWithFullChoice((double[])firstDoubleVector.Clone());
-                Console.WriteLine("Po 3");
+                endTime = DateTime.Now;
+                sixthSumD += startTime - endTime;
+                startTime = DateTime.Now;
 
                 WriteVectorToFile(firstDoubleResult, "(AxX)DataResultDouble");
                 WriteVectorToFile(secondDoubleResult, "(A+B+C)x(X)DataResultDouble");
@@ -254,8 +318,34 @@ namespace Zadanie2
                 WriteVectorToFile(fourthDoubleResult, "NoChoiceGaussDouble");
                 WriteVectorToFile(fifthDoubleResult, "RowChoiceGaussDouble");
                 WriteVectorToFile(sixthDoubleResult, "FullChoiceGaussDouble");
-                Console.WriteLine("koniec {0}", i);
+
+
                 i++;
+            }
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(source + "Results\\Times.txt", true))
+            {
+                file.WriteLine(String.Format("{0:N16}", firstSumFr.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", secondSumFr.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", thirdSumFr.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fourthSumFr.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fifthSumFr.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", sixthSumFr.TotalSeconds / -3));
+                file.WriteLine("*** *** *** *** ***");
+                file.WriteLine(String.Format("{0:N16}", firstSumF.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", secondSumF.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", thirdSumF.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fourthSumF.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fifthSumF.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", sixthSumF.TotalSeconds / -3));
+                file.WriteLine("*** *** *** *** ***");
+                file.WriteLine(String.Format("{0:N16}", firstSumD.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", secondSumD.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", thirdSumD.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fourthSumD.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", fifthSumD.TotalSeconds / -3));
+                file.WriteLine(String.Format("{0:N16}", sixthSumD.TotalSeconds / -3));
+                file.WriteLine("*** *** *** *** ***");
             }
 
         }
