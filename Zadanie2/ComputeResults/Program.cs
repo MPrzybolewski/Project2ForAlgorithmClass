@@ -51,8 +51,8 @@ namespace ComputeResults
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
             }
 
-            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
-            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
         }
 
         private static void computeAxX(string fileName)
@@ -75,8 +75,8 @@ namespace ComputeResults
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
             }
 
-            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
-            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
         }
 
         private static void computeAxBxC(string fileName)
@@ -99,8 +99,8 @@ namespace ComputeResults
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
             }
 
-            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
-            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
         }
 
 
@@ -125,8 +125,8 @@ namespace ComputeResults
                 floatAndFractionDiffrenceSum += floatAndFractionDiffrence;
             }
 
-            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum);
-            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum);
+            Console.WriteLine("Bład dla double: {0}", doubleAndFractionDiffrenceSum/3);
+            Console.WriteLine("Błąd dla float: {0}", floatAndFractionDiffrenceSum/3);
             
         }
 
