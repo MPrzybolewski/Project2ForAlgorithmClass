@@ -9,7 +9,10 @@ namespace ComputeResults
         private static int size = 10;
         public static void Main(string[] args)
         {
+            size = Int32.Parse(args[0]);
+            Console.WriteLine("Obliczenia dla macierzy kwadratowej {0}", size);
             ComputeOperationsResults();
+            Console.WriteLine("Koniec");
             Console.ReadKey();
         }
 
