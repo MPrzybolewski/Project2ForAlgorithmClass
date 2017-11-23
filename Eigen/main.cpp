@@ -29,7 +29,7 @@ namespace patch
 
 
 void CleanFiles();
-int CountSize();
+
 void writeDoubleMatrixToFile(MatrixXd a, int size,string name);
 void writeFloatMatrixToFile(MatrixXd a, int size,string name);
 void writeDoubleVectorFile(string name, VectorXd doubleVector, int size);
@@ -419,15 +419,4 @@ void writeFloatVectorFile(string name, VectorXf floatVector, int size)
   myfile.close();
 }
 
-int CountSize()
-{
-	using namespace boost::algorithm;
-	ifstream input("D:\\Projekty\\Algorytmy\\Data\\DataRange\\DataRangeDouble1.txt");
-	vector<string> tokens;
-	string line;
-	getline(input, line);
-	split(tokens, line, is_any_of(" "));
-	int result = tokens.size() - 1;
-	return result;
-}
 

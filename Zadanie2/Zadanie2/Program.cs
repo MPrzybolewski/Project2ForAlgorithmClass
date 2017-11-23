@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 
+//Marke Przybolewski i Patryk Matuszak
 namespace Zadanie2
 {
     class MainClass
